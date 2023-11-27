@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://d057wcgaubavk"]
+
+[ext_resource type="Script" path="res://Scripts/monster_base.gd" id="1_ady37"]
+[ext_resource type="PackedScene" uid="uid://digo5e4v67p23" path="res://Scenes/unit_ui.tscn" id="2_1nrvu"]
+[ext_resource type="Texture2D" uid="uid://dwglmpqppipyx" path="res://Assets/Sprites/revive-effect.png" id="2_y0uhw"]
+[ext_resource type="Texture2D" uid="uid://bf3spxahwv2ol" path="res://Assets/UI/monster-items.png" id="3_1g7db"]
+[ext_resource type="PackedScene" uid="uid://bkxioccsl4bbm" path="res://Scenes/hit_particles.tscn" id="3_ceh7i"]
+
+[node name="Monster" type="Node2D" groups=["monsters"]]
+script = ExtResource("1_ady37")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="UI" type="Node2D" parent="Sprite"]
+
+[node name="Item" type="Sprite2D" parent="Sprite/UI"]
+position = Vector2(-36, -186)
+texture = ExtResource("3_1g7db")
+hframes = 5
+
+[node name="Time" type="Label" parent="Sprite/UI"]
+offset_left = -6.0
+offset_top = -203.0
+offset_right = 34.0
+offset_bottom = -164.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 26
+text = "5"
+
+[node name="HitParticles" parent="Sprite" instance=ExtResource("3_ceh7i")]
+
+[node name="ReviveSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, -258)
+texture = ExtResource("2_y0uhw")
+
+[node name="UnitUI" parent="." instance=ExtResource("2_1nrvu")]
+position = Vector2(-685, -338)

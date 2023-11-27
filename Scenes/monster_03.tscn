@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://cecbxdm8klbeg"]
+
+[ext_resource type="PackedScene" uid="uid://d057wcgaubavk" path="res://Scenes/monster_base.tscn" id="1_utf0c"]
+[ext_resource type="Script" path="res://Scripts/monster_03.gd" id="2_0ocqu"]
+[ext_resource type="Texture2D" uid="uid://deqjiex04my51" path="res://Assets/Sprites/m03-sprites.png" id="3_6cx18"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t07e"]
+atlas = ExtResource("3_6cx18")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj5aq"]
+atlas = ExtResource("3_6cx18")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or7nu"]
+atlas = ExtResource("3_6cx18")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iepel"]
+atlas = ExtResource("3_6cx18")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ym0d"]
+atlas = ExtResource("3_6cx18")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko08w"]
+atlas = ExtResource("3_6cx18")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuilx"]
+atlas = ExtResource("3_6cx18")
+region = Rect2(400, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj8ve"]
+atlas = ExtResource("3_6cx18")
+region = Rect2(600, 200, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qa64"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t07e")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj5aq")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or7nu")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iepel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ym0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko08w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ym0d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uuilx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj8ve")
+}],
+"loop": true,
+"name": &"power",
+"speed": 10.0
+}]
+
+[node name="MonsterTree" instance=ExtResource("1_utf0c")]
+script = ExtResource("2_0ocqu")
+health_max = 6
+damages = 1
+bounty = 15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
+position = Vector2(-99, -203)
+sprite_frames = SubResource("SpriteFrames_0qa64")
+animation = &"power"
+autoplay = "idle"
+frame = 1
+frame_progress = 1.0
+centered = false
+
+[node name="UI" parent="Sprite" index="1"]
+position = Vector2(19, 8)
+
+[node name="HitParticles" parent="Sprite" index="2"]
+position = Vector2(-4, -66)
+
+[connection signal="animation_finished" from="Sprite/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

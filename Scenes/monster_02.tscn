@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://roalvwi05ump"]
+
+[ext_resource type="PackedScene" uid="uid://d057wcgaubavk" path="res://Scenes/monster_base.tscn" id="1_fspsg"]
+[ext_resource type="Script" path="res://Scripts/monster_02.gd" id="2_sahqn"]
+[ext_resource type="Texture2D" uid="uid://dklr25xff7dxr" path="res://Assets/Sprites/m02-sprites.png" id="3_2r2md"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnl2v"]
+atlas = ExtResource("3_2r2md")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82sk5"]
+atlas = ExtResource("3_2r2md")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54ry4"]
+atlas = ExtResource("3_2r2md")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_poptf"]
+atlas = ExtResource("3_2r2md")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecwd4"]
+atlas = ExtResource("3_2r2md")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtqv1"]
+atlas = ExtResource("3_2r2md")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcrbn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnl2v")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82sk5")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54ry4")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_poptf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecwd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtqv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecwd4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[node name="Monster02" instance=ExtResource("1_fspsg")]
+script = ExtResource("2_sahqn")
+delay_attack = 10.0
+shields_max = 3
+bounty = 15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
+position = Vector2(-99, -203)
+sprite_frames = SubResource("SpriteFrames_kcrbn")
+animation = &"attack"
+autoplay = "idle"
+centered = false
+
+[node name="UI" parent="Sprite" index="1"]
+position = Vector2(18, 13)
+
+[node name="HitParticles" parent="Sprite" index="2"]
+position = Vector2(-24, -74)
+
+[connection signal="animation_finished" from="Sprite/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

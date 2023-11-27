@@ -1,0 +1,143 @@
+[gd_scene load_steps=14 format=3 uid="uid://yuy7smhovixa"]
+
+[ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
+[ext_resource type="Texture2D" uid="uid://ds0fu6j0sk2aq" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
+[ext_resource type="Texture2D" uid="uid://d2aer5wtb1oem" path="res://Assets/Cards/combo_effect.png" id="3_hdsbb"]
+[ext_resource type="Texture2D" uid="uid://bdek2qenbuvmt" path="res://Assets/Cards/cardset.png" id="3_nlr24"]
+[ext_resource type="PackedScene" uid="uid://eae21bejlvma" path="res://Scenes/player.tscn" id="4_yabtv"]
+[ext_resource type="Script" path="res://Scripts/game-over.gd" id="5_s6mcq"]
+[ext_resource type="PackedScene" uid="uid://digo5e4v67p23" path="res://Scenes/unit_ui.tscn" id="6_ic78m"]
+[ext_resource type="Texture2D" uid="uid://bmfh3n7uncfpd" path="res://Assets/UI/SingleUI.png" id="7_w8cjg"]
+[ext_resource type="AudioStream" uid="uid://dd34qbfve5hid" path="res://Assets/Sound/combo.wav" id="9_p8fuy"]
+[ext_resource type="AudioStream" uid="uid://u3tgirxpc0o3" path="res://Assets/Sound/combo_end.wav" id="10_lff2h"]
+[ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
+[ext_resource type="AudioStream" uid="uid://c3ss7vualrgaa" path="res://Assets/Sound/card_turn.wav" id="11_b8wel"]
+[ext_resource type="AudioStream" uid="uid://54xt1vc5epu2" path="res://Assets/Sound/shield.wav" id="12_pxlag"]
+
+[node name="MainFight" type="Node2D"]
+script = ExtResource("1_6jo5b")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_flsof")
+centered = false
+
+[node name="CardStack" type="Node2D" parent="."]
+position = Vector2(700, 580)
+
+[node name="ComboEffect" type="Sprite2D" parent="CardStack"]
+visible = false
+texture = ExtResource("3_hdsbb")
+
+[node name="CardSprite" type="Sprite2D" parent="CardStack"]
+texture = ExtResource("3_nlr24")
+hframes = 8
+vframes = 8
+
+[node name="ComboText" type="Label" parent="CardStack"]
+offset_left = -93.0
+offset_top = 74.0
+offset_right = 97.0
+offset_bottom = 111.0
+theme_override_font_sizes/font_size = 24
+text = "Combo x4"
+horizontal_alignment = 1
+
+[node name="GameOver" type="Node2D" parent="."]
+visible = false
+script = ExtResource("5_s6mcq")
+
+[node name="TextGameOver" type="Label" parent="GameOver"]
+offset_left = 109.0
+offset_top = 93.0
+offset_right = 500.0
+offset_bottom = 195.0
+theme_override_font_sizes/font_size = 72
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="TextFinalScore" type="Label" parent="GameOver"]
+offset_left = 105.0
+offset_top = 264.0
+offset_right = 496.0
+offset_bottom = 404.0
+theme_override_font_sizes/font_size = 48
+text = "Your score:
+1200"
+horizontal_alignment = 1
+
+[node name="BtnPlayAgain" type="Button" parent="GameOver"]
+offset_left = 193.0
+offset_top = 494.0
+offset_right = 436.0
+offset_bottom = 569.0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+text = "Play again"
+
+[node name="BtnExit" type="Button" parent="GameOver"]
+offset_left = 191.0
+offset_top = 593.0
+offset_right = 434.0
+offset_bottom = 668.0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+text = "Exit
+"
+
+[node name="Player" parent="." instance=ExtResource("4_yabtv")]
+position = Vector2(682, 327)
+
+[node name="UnitUI" parent="." instance=ExtResource("6_ic78m")]
+position = Vector2(-5, -4)
+
+[node name="HUD" type="Node2D" parent="."]
+
+[node name="MoneyUI" type="Sprite2D" parent="HUD"]
+position = Vector2(1169, 656)
+texture = ExtResource("7_w8cjg")
+
+[node name="LevelUI" type="Sprite2D" parent="HUD"]
+position = Vector2(1169, 557)
+texture = ExtResource("7_w8cjg")
+
+[node name="Level" type="Label" parent="HUD"]
+offset_left = 1105.0
+offset_top = 532.0
+offset_right = 1219.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 32
+text = "LVL 12"
+
+[node name="Money" type="Label" parent="HUD"]
+offset_left = 1105.0
+offset_top = 631.0
+offset_right = 1242.0
+offset_bottom = 679.0
+theme_override_font_sizes/font_size = 32
+text = "$ 1250"
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Combo" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_p8fuy")
+pitch_scale = 0.8
+
+[node name="CardsDeal" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_vsaxh")
+
+[node name="CardTurn" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_b8wel")
+volume_db = -15.0
+
+[node name="Shield" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_pxlag")
+volume_db = -5.333
+pitch_scale = 1.51
+
+[node name="ComboEnd" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_lff2h")
+
+[connection signal="pressed" from="GameOver/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
+[connection signal="pressed" from="GameOver/BtnExit" to="." method="_on_btn_exit_pressed"]

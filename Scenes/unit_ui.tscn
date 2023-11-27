@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://digo5e4v67p23"]
+
+[ext_resource type="Script" path="res://Scripts/unit_ui.gd" id="1_m367o"]
+[ext_resource type="Texture2D" uid="uid://cyc427mhvkp8l" path="res://Assets/UI/Health-Container.png" id="2_l4vex"]
+[ext_resource type="Texture2D" uid="uid://b0v3cxb35iskv" path="res://Assets/UI/Health.png" id="3_cmc6b"]
+[ext_resource type="Texture2D" uid="uid://b0knqur182434" path="res://Assets/UI/UI-Shield.png" id="4_rp8r6"]
+
+[node name="UnitUI" type="Node2D"]
+position = Vector2(-8, -4)
+script = ExtResource("1_m367o")
+
+[node name="Health-container" type="Sprite2D" parent="."]
+position = Vector2(685, 364)
+texture = ExtResource("2_l4vex")
+
+[node name="Health" type="Sprite2D" parent="Health-container"]
+position = Vector2(-54, -16)
+texture = ExtResource("3_cmc6b")
+centered = false
+
+[node name="HealthText" type="Label" parent="Health-container"]
+offset_left = -54.0
+offset_top = -17.0
+offset_right = 52.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 24
+text = "3/3"
+horizontal_alignment = 1
+
+[node name="Shield" type="Sprite2D" parent="."]
+position = Vector2(722, 407)
+texture = ExtResource("4_rp8r6")
+
+[node name="ShieldsText" type="Label" parent="Shield"]
+offset_left = -15.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 24
+text = "4"
+horizontal_alignment = 1

@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://diq0n5na4p3pd"]
+
+[ext_resource type="PackedScene" uid="uid://d057wcgaubavk" path="res://Scenes/monster_base.tscn" id="1_mra2i"]
+[ext_resource type="Script" path="res://Scripts/monster_01.gd" id="2_va1hi"]
+[ext_resource type="Texture2D" uid="uid://d3smr01v1g56r" path="res://Assets/Sprites/m01-sprites.png" id="3_mvru4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t81f"]
+atlas = ExtResource("3_mvru4")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14f5q"]
+atlas = ExtResource("3_mvru4")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k783o"]
+atlas = ExtResource("3_mvru4")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovt0g"]
+atlas = ExtResource("3_mvru4")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0lo7"]
+atlas = ExtResource("3_mvru4")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a8rd"]
+atlas = ExtResource("3_mvru4")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcrbn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t81f")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14f5q")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k783o")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovt0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0lo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a8rd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0lo7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[node name="Monster01" instance=ExtResource("1_mra2i")]
+script = ExtResource("2_va1hi")
+damages = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
+position = Vector2(-99, -203)
+sprite_frames = SubResource("SpriteFrames_kcrbn")
+animation = &"idle"
+autoplay = "idle"
+centered = false
+
+[node name="UI" parent="Sprite" index="1"]
+position = Vector2(18, 13)
+
+[node name="HitParticles" parent="Sprite" index="2"]
+position = Vector2(-25, -66)
+
+[connection signal="animation_finished" from="Sprite/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
