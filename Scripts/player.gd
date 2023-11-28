@@ -4,6 +4,10 @@ extends Area2D
 @onready var shield_sprite = $Shield
 @onready var hit_paticles = $HitParticles
 
+@onready var sound_attack = $Sounds/Attack
+@onready var sound_hurt = $Sounds/Hurt
+@onready var sound_shield = $Sounds/Shield
+
 var is_dead = false
 var is_victory = false
 var velocity = 0
@@ -33,15 +37,23 @@ func hurt():
 	sprite.play("hurt")
 	hit_paticles.process_material.direction = Vector3(1, -0.5, 0)
 	hit_paticles.emitting = true
+	await get_tree().create_timer(0.2).timeout
+	sound_hurt.pitch_scale = randf_range(0.95, 1.2)
+	sound_hurt.play()
 	
 func shield():
 	var tween = get_tree().create_tween()
 	shield_sprite.modulate.a = 0.8
 	shield_sprite.show()
 	tween.tween_property(shield_sprite, "modulate:a", 0.0, 0.3)
+	await get_tree().create_timer(0.2).timeout
+	sound_shield.pitch_scale = randf_range(1.2, 1.8)
+	sound_shield.play()
 	
 func attack():
 	sprite.play("attack")
+	sound_attack.pitch_scale = randf_range(0.9, 1.5)
+	sound_attack.play()
 	
 func victory():
 	is_victory = true

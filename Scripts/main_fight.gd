@@ -27,7 +27,6 @@ signal game_over
 @onready var sound_combo_end = $Sounds/ComboEnd
 @onready var sound_cards_deal = $Sounds/CardsDeal
 @onready var sound_card_turn = $Sounds/CardTurn
-@onready var sound_shield = $Sounds/Shield
 
 @export var can_select_card = true
 
@@ -251,15 +250,12 @@ func _on_monster_attack(damages):
 	if player_shields >= damages:
 		player_shields -= damages
 		player.shield()
-		sound_shield.pitch_scale = randf_range(1.2, 1.8)
-		sound_shield.play()
 	else:
 		player.hurt()
 		damages -= player_shields
 		player_shields = 0
 		player_health -= damages
 		
-	# TODO Game Over
 	if player_health < 1:
 		process_game_over()
 		

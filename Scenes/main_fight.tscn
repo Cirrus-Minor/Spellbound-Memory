@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://yuy7smhovixa"]
+[gd_scene load_steps=13 format=3 uid="uid://yuy7smhovixa"]
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
 [ext_resource type="Texture2D" uid="uid://ds0fu6j0sk2aq" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
@@ -12,7 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://u3tgirxpc0o3" path="res://Assets/Sound/combo_end.wav" id="10_lff2h"]
 [ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
 [ext_resource type="AudioStream" uid="uid://c3ss7vualrgaa" path="res://Assets/Sound/card_turn.wav" id="11_b8wel"]
-[ext_resource type="AudioStream" uid="uid://54xt1vc5epu2" path="res://Assets/Sound/shield.wav" id="12_pxlag"]
 
 [node name="MainFight" type="Node2D"]
 script = ExtResource("1_6jo5b")
@@ -122,7 +121,12 @@ text = "$ 1250"
 
 [node name="Combo" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("9_p8fuy")
+volume_db = -8.0
 pitch_scale = 0.8
+
+[node name="ComboEnd" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_lff2h")
+volume_db = -8.0
 
 [node name="CardsDeal" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("10_vsaxh")
@@ -130,14 +134,6 @@ stream = ExtResource("10_vsaxh")
 [node name="CardTurn" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("11_b8wel")
 volume_db = -15.0
-
-[node name="Shield" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("12_pxlag")
-volume_db = -5.333
-pitch_scale = 1.51
-
-[node name="ComboEnd" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("10_lff2h")
 
 [connection signal="pressed" from="GameOver/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
 [connection signal="pressed" from="GameOver/BtnExit" to="." method="_on_btn_exit_pressed"]
