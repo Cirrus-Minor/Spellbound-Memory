@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://yuy7smhovixa"]
+[gd_scene load_steps=14 format=3 uid="uid://yuy7smhovixa"]
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
 [ext_resource type="Texture2D" uid="uid://ds0fu6j0sk2aq" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://u3tgirxpc0o3" path="res://Assets/Sound/combo_end.wav" id="10_lff2h"]
 [ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
 [ext_resource type="AudioStream" uid="uid://c3ss7vualrgaa" path="res://Assets/Sound/card_turn.wav" id="11_b8wel"]
+[ext_resource type="AudioStream" uid="uid://8wrf4kinngyy" path="res://Assets/Sound/revive.wav" id="13_tgsfq"]
 
 [node name="MainFight" type="Node2D"]
 script = ExtResource("1_6jo5b")
@@ -134,6 +135,11 @@ stream = ExtResource("10_vsaxh")
 [node name="CardTurn" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("11_b8wel")
 volume_db = -15.0
+
+[node name="Revive" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_tgsfq")
+volume_db = -8.0
+pitch_scale = 0.8
 
 [connection signal="pressed" from="GameOver/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
 [connection signal="pressed" from="GameOver/BtnExit" to="." method="_on_btn_exit_pressed"]

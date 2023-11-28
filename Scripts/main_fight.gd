@@ -27,6 +27,7 @@ signal game_over
 @onready var sound_combo_end = $Sounds/ComboEnd
 @onready var sound_cards_deal = $Sounds/CardsDeal
 @onready var sound_card_turn = $Sounds/CardTurn
+@onready var sound_revive = $Sounds/Revive
 
 @export var can_select_card = true
 
@@ -279,6 +280,9 @@ func revive_monster(amount):
 		if revive_done < amount && monster.is_dead:
 			monster.revive()
 			revive_done += 1
+			
+	if revive_done > 0:
+		sound_revive.play()
 		
 	check_victory()
 	
@@ -333,6 +337,11 @@ func _on_btn_exit_pressed():
 	
 func generate_monsters():
 	monsters.clear()
+	
+	add_monster(monster_03, monster_pos_1, 12)
+	add_monster(monster_01, monster_pos_2, 10)
+	add_monster(monster_01, monster_pos_3, 8)
+	return
 	
 	match GameState.level:
 		1:
