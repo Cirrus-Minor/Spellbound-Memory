@@ -23,11 +23,12 @@ signal game_over
 @onready var level_text = $HUD/Level
 @onready var money_text = $HUD/Money
 @onready var game_over_ui = $GameOver
+@onready var next_level_new_card_ui = $LevelEndNewCard
 @onready var sound_combo = $Sounds/Combo
 @onready var sound_combo_end = $Sounds/ComboEnd
 @onready var sound_cards_deal = $Sounds/CardsDeal
 @onready var sound_card_turn = $Sounds/CardTurn
-@onready var sound_shield = $Sounds/Shield
+@onready var sound_revive = $Sounds/Revive
 
 @export var can_select_card = true
 
@@ -251,15 +252,12 @@ func _on_monster_attack(damages):
 	if player_shields >= damages:
 		player_shields -= damages
 		player.shield()
-		sound_shield.pitch_scale = randf_range(1.2, 1.8)
-		sound_shield.play()
 	else:
 		player.hurt()
 		damages -= player_shields
 		player_shields = 0
 		player_health -= damages
 		
-	# TODO Game Over
 	if player_health < 1:
 		process_game_over()
 		
@@ -283,6 +281,9 @@ func revive_monster(amount):
 		if revive_done < amount && monster.is_dead:
 			monster.revive()
 			revive_done += 1
+			
+	if revive_done > 0:
+		sound_revive.play()
 		
 	check_victory()
 	
@@ -307,13 +308,15 @@ func victory():
 	await get_tree().create_timer(1.0).timeout
 	state = Game_state.Victory
 	get_tree().call_group("cards", "make_fall")
-	await get_tree().create_timer(4.0).timeout # waits for 1 second
-	GameState.player_health = player_health
-	GameState.player_health_max = player_health_max
-	GameState.player_shields = player_shields_max
-	GameState.player_shields_max = player_shields_max
-	GameState.level += 1
-	level_success.emit()
+	
+	var loot = [1, 3, 4, 5, 6, 8] 
+	var new_card = loot.pick_random()
+	GameState.Deck.push_back(new_card)
+
+	next_level_new_card_ui.init_card(new_card)
+	next_level_new_card_ui.show()
+
+
 	
 func process_game_over():
 	player_health = 0
@@ -330,6 +333,14 @@ func _on_btn_play_again_pressed():
 
 func _on_btn_exit_pressed():
 	get_tree().quit()
+	
+func _on_btn_continue_pressed():
+	GameState.player_health = player_health
+	GameState.player_health_max = player_health_max
+	GameState.player_shields = player_shields_max
+	GameState.player_shields_max = player_shields_max
+	GameState.level += 1
+	level_success.emit()
 	
 ##############################
 ##       LEVEL FACTORY      ##
@@ -452,9 +463,3 @@ func get_shields_gain():
 func get_reveal_number():
 	if is_combo_power() : return 6
 	else : return 4
-
-
-
-
-
-

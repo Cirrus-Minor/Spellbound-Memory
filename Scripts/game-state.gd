@@ -31,7 +31,7 @@ func reset():
 	level = 1
 	money = 0
 	money_total = 0
-	Deck = [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7];
+	Deck = [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7];
 
 func add_money(gain):
 	money += gain

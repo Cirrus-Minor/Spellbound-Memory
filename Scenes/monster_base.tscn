@@ -37,3 +37,5 @@ texture = ExtResource("2_y0uhw")
 
 [node name="UnitUI" parent="." instance=ExtResource("2_1nrvu")]
 position = Vector2(-685, -338)
+
+[node name="Sounds" type="Node" parent="."]

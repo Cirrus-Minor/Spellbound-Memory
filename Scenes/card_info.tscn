@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://5mepquwbookt"]
+
+[ext_resource type="Texture2D" uid="uid://bdek2qenbuvmt" path="res://Assets/Cards/cardset.png" id="1_dogys"]
+[ext_resource type="Script" path="res://Scripts/card_info.gd" id="1_j3nxa"]
+[ext_resource type="Texture2D" uid="uid://3kvmhhyggv4b" path="res://Assets/Cards/cardinfo.png" id="2_m1p01"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s702n"]
+
+[node name="CardInfo" type="Node2D"]
+position = Vector2(47, 130)
+script = ExtResource("1_j3nxa")
+
+[node name="Cardinfo" type="Sprite2D" parent="."]
+position = Vector2(256, 96)
+texture = ExtResource("2_m1p01")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(62, 60)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_dogys")
+hframes = 8
+vframes = 8
+frame = 1
+
+[node name="Title" type="Label" parent="."]
+offset_left = 120.0
+offset_top = 49.0
+offset_right = 241.0
+offset_bottom = 99.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s702n")
+text = "Fireball"
+
+[node name="Content" type="RichTextLabel" parent="."]
+offset_left = 28.0
+offset_top = 116.0
+offset_right = 485.0
+offset_bottom = 188.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "The [b]Fireball[/b] is an attack spell that inflicts [b]5 damages[/b] to the first monster."

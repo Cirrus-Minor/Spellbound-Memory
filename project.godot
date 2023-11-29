@@ -10,14 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Memory RL"
+config/name="Spellbound Memory"
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameState="*res://Scripts/game_state.gd"
+GameState="*res://Scripts/game-state.gd"
 
 [debug]
 
