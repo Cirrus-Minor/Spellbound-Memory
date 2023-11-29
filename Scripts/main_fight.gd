@@ -23,6 +23,7 @@ signal game_over
 @onready var level_text = $HUD/Level
 @onready var money_text = $HUD/Money
 @onready var game_over_ui = $GameOver
+@onready var next_level_new_card_ui = $LevelEndNewCard
 @onready var sound_combo = $Sounds/Combo
 @onready var sound_combo_end = $Sounds/ComboEnd
 @onready var sound_cards_deal = $Sounds/CardsDeal
@@ -307,13 +308,15 @@ func victory():
 	await get_tree().create_timer(1.0).timeout
 	state = Game_state.Victory
 	get_tree().call_group("cards", "make_fall")
-	await get_tree().create_timer(4.0).timeout # waits for 1 second
-	GameState.player_health = player_health
-	GameState.player_health_max = player_health_max
-	GameState.player_shields = player_shields_max
-	GameState.player_shields_max = player_shields_max
-	GameState.level += 1
-	level_success.emit()
+	
+	var loot = [1, 3, 4, 5, 6, 8] 
+	var new_card = loot.pick_random()
+	GameState.Deck.push_back(new_card)
+
+	next_level_new_card_ui.init_card(new_card)
+	next_level_new_card_ui.show()
+
+
 	
 func process_game_over():
 	player_health = 0
@@ -331,17 +334,20 @@ func _on_btn_play_again_pressed():
 func _on_btn_exit_pressed():
 	get_tree().quit()
 	
+func _on_btn_continue_pressed():
+	GameState.player_health = player_health
+	GameState.player_health_max = player_health_max
+	GameState.player_shields = player_shields_max
+	GameState.player_shields_max = player_shields_max
+	GameState.level += 1
+	level_success.emit()
+	
 ##############################
 ##       LEVEL FACTORY      ##
 ##############################
 	
 func generate_monsters():
 	monsters.clear()
-	
-	add_monster(monster_03, monster_pos_1, 12)
-	add_monster(monster_01, monster_pos_2, 10)
-	add_monster(monster_01, monster_pos_3, 8)
-	return
 	
 	match GameState.level:
 		1:
@@ -457,9 +463,3 @@ func get_shields_gain():
 func get_reveal_number():
 	if is_combo_power() : return 6
 	else : return 4
-
-
-
-
-
-

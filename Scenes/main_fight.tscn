@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://yuy7smhovixa"]
+[gd_scene load_steps=16 format=3 uid="uid://yuy7smhovixa"]
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
 [ext_resource type="Texture2D" uid="uid://ds0fu6j0sk2aq" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
@@ -7,12 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://eae21bejlvma" path="res://Scenes/player.tscn" id="4_yabtv"]
 [ext_resource type="Script" path="res://Scripts/game-over.gd" id="5_s6mcq"]
 [ext_resource type="PackedScene" uid="uid://digo5e4v67p23" path="res://Scenes/unit_ui.tscn" id="6_ic78m"]
+[ext_resource type="Script" path="res://Scripts/LevelEndNewCard.gd" id="6_pflc5"]
 [ext_resource type="Texture2D" uid="uid://bmfh3n7uncfpd" path="res://Assets/UI/SingleUI.png" id="7_w8cjg"]
 [ext_resource type="AudioStream" uid="uid://dd34qbfve5hid" path="res://Assets/Sound/combo.wav" id="9_p8fuy"]
 [ext_resource type="AudioStream" uid="uid://u3tgirxpc0o3" path="res://Assets/Sound/combo_end.wav" id="10_lff2h"]
 [ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
 [ext_resource type="AudioStream" uid="uid://c3ss7vualrgaa" path="res://Assets/Sound/card_turn.wav" id="11_b8wel"]
 [ext_resource type="AudioStream" uid="uid://8wrf4kinngyy" path="res://Assets/Sound/revive.wav" id="13_tgsfq"]
+[ext_resource type="PackedScene" uid="uid://5mepquwbookt" path="res://Scenes/card_info.tscn" id="14_hkp2r"]
 
 [node name="MainFight" type="Node2D"]
 script = ExtResource("1_6jo5b")
@@ -86,6 +88,45 @@ toggle_mode = true
 text = "Exit
 "
 
+[node name="LevelEndNewCard" type="Node2D" parent="."]
+visible = false
+script = ExtResource("6_pflc5")
+
+[node name="CardInfo" parent="LevelEndNewCard" instance=ExtResource("14_hkp2r")]
+position = Vector2(46, 99)
+
+[node name="Label" type="Label" parent="LevelEndNewCard"]
+offset_left = 58.0
+offset_top = 53.0
+offset_right = 235.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 18
+text = "Congratulations, you've found this card:
+"
+
+[node name="BtnContinue" type="Button" parent="LevelEndNewCard/Label"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 419.0
+offset_right = 366.0
+offset_bottom = 494.0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+text = "Continue"
+
+[node name="BtnExit" type="Button" parent="LevelEndNewCard/Label"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 518.0
+offset_right = 364.0
+offset_bottom = 593.0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+text = "Exit
+"
+
 [node name="Player" parent="." instance=ExtResource("4_yabtv")]
 position = Vector2(682, 327)
 
@@ -143,3 +184,5 @@ pitch_scale = 0.8
 
 [connection signal="pressed" from="GameOver/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
 [connection signal="pressed" from="GameOver/BtnExit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="LevelEndNewCard/Label/BtnContinue" to="." method="_on_btn_continue_pressed"]
+[connection signal="pressed" from="LevelEndNewCard/Label/BtnExit" to="." method="_on_btn_exit_pressed"]
