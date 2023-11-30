@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://yuy7smhovixa"]
+[gd_scene load_steps=18 format=3 uid="uid://yuy7smhovixa"]
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
 [ext_resource type="Texture2D" uid="uid://ds0fu6j0sk2aq" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
@@ -14,7 +14,9 @@
 [ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
 [ext_resource type="AudioStream" uid="uid://c3ss7vualrgaa" path="res://Assets/Sound/card_turn.wav" id="11_b8wel"]
 [ext_resource type="AudioStream" uid="uid://8wrf4kinngyy" path="res://Assets/Sound/revive.wav" id="13_tgsfq"]
+[ext_resource type="AudioStream" uid="uid://dg6nvtll1udlo" path="res://Assets/Sound/coins_02.wav" id="13_yttod"]
 [ext_resource type="PackedScene" uid="uid://5mepquwbookt" path="res://Scenes/card_info.tscn" id="14_hkp2r"]
+[ext_resource type="AudioStream" uid="uid://soe77tbpedc1" path="res://Assets/Sound/coins_03.wav" id="14_i6xgg"]
 
 [node name="MainFight" type="Node2D"]
 script = ExtResource("1_6jo5b")
@@ -169,6 +171,12 @@ pitch_scale = 0.8
 [node name="ComboEnd" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("10_lff2h")
 volume_db = -8.0
+
+[node name="Coin" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_yttod")
+
+[node name="Coins" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("14_i6xgg")
 
 [node name="CardsDeal" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("10_vsaxh")

@@ -29,6 +29,8 @@ signal game_over
 @onready var sound_cards_deal = $Sounds/CardsDeal
 @onready var sound_card_turn = $Sounds/CardTurn
 @onready var sound_revive = $Sounds/Revive
+@onready var sound_coin = $Sounds/Coin
+@onready var sound_coins = $Sounds/Coins
 
 @export var can_select_card = true
 
@@ -237,6 +239,7 @@ func update_combo(new_combo):
 		combo_text.text = "Combo X" + str(combo)
 		combo_effect_sprite.show()
 		GameState.add_money(2)
+		sound_coin.play()
 		
 	if combo > 0:
 		sound_combo.play()
@@ -438,6 +441,7 @@ func activate_card(card):
 		8: # Coin +5
 			var gain = 5
 			if is_combo_power(): gain = gain * 2
+			sound_coins.play()
 			GameState.add_money(gain)
 		
 func get_damages_fireball():

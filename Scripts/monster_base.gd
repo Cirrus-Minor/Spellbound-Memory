@@ -15,6 +15,7 @@ class_name MonsterBase
 @onready var sprite_item = $Sprite/UI/Item
 @onready var time_text = $Sprite/UI/Time
 @onready var hit_particles = $Sprite/HitParticles
+@onready var sound_coins = $Sounds/SoundCoins
 
 var health = health_max
 var shields = shields_max
@@ -100,8 +101,12 @@ func hurt(damages):
 		velocity_y = -400
 		sprite.position.y = - 2
 		sprite_ui.hide()
-		GameState.add_money(bounty)
-		bounty = 0
+		if bounty > 0:
+			sound_coins.pitch_scale = randf_range(0.9, 1.1)
+			sound_coins.play()
+			GameState.add_money(bounty)
+			bounty = 0
+		
 		on_dying()
 	else:
 		on_hurting()
