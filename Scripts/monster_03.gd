@@ -25,7 +25,7 @@ func process_action():
 	next_action()
 	
 func next_action():
-	if dead_monsters > 0:
+	if current_action == 1 && dead_monsters > 0:
 		current_action = 2
 		sprite_item.frame = 3
 	else:
