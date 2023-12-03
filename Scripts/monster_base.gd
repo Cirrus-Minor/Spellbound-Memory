@@ -49,7 +49,7 @@ func _process(delta):
 			process_action()
 			
 		time_text.text = str(ceil(timer_attack)).pad_decimals(0)
-		if timer_attack < 2.5:
+		if timer_attack <= 2:
 			var color_add = 1.5 + 0.5 * cos(Time.get_ticks_msec() / 100.0)
 			sprite_item.modulate.r = color_add 
 			sprite_item.modulate.g = color_add

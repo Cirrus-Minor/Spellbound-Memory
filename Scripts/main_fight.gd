@@ -70,7 +70,7 @@ func _ready():
 	player_shields_max = GameState.player_shields_max
 	update_player()
 	
-	level_text.text = "LVL: " + str(GameState.level)
+	level_text.text = "LVL " + str(GameState.level)
 	money_display = GameState.money
 	
 	generate_monsters()

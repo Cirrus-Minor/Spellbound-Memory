@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d057wcgaubavk"]
+[gd_scene load_steps=8 format=3 uid="uid://d057wcgaubavk"]
 
 [ext_resource type="Script" path="res://Scripts/monster_base.gd" id="1_ady37"]
 [ext_resource type="PackedScene" uid="uid://digo5e4v67p23" path="res://Scenes/unit_ui.tscn" id="2_1nrvu"]
 [ext_resource type="Texture2D" uid="uid://dwglmpqppipyx" path="res://Assets/Sprites/revive-effect.png" id="2_y0uhw"]
 [ext_resource type="Texture2D" uid="uid://bf3spxahwv2ol" path="res://Assets/UI/monster-items.png" id="3_1g7db"]
 [ext_resource type="PackedScene" uid="uid://bkxioccsl4bbm" path="res://Scenes/hit_particles.tscn" id="3_ceh7i"]
+[ext_resource type="FontFile" uid="uid://hmsr1uee8lho" path="res://Assets/Fonts/Lato-Bold.ttf" id="3_vk0v1"]
 [ext_resource type="AudioStream" uid="uid://byxkhlvyxymh5" path="res://Assets/Sound/coins_01.wav" id="6_nup7o"]
 
 [node name="Monster" type="Node2D" groups=["monsters"]]
@@ -21,11 +22,12 @@ hframes = 5
 
 [node name="Time" type="Label" parent="Sprite/UI"]
 offset_left = -6.0
-offset_top = -203.0
+offset_top = -202.0
 offset_right = 34.0
-offset_bottom = -164.0
+offset_bottom = -170.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_vk0v1")
 theme_override_font_sizes/font_size = 26
 text = "5"
 
