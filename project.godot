@@ -29,6 +29,15 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 
+[file_customization]
+
+folder_colors={
+"res://Assets/": "pink",
+"res://Bin/": "gray",
+"res://Scenes/": "orange",
+"res://Scripts/": "blue"
+}
+
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true

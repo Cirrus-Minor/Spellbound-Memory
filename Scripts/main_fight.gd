@@ -319,8 +319,6 @@ func victory():
 	next_level_new_card_ui.init_card(new_card)
 	next_level_new_card_ui.show()
 
-
-	
 func process_game_over():
 	player_health = 0
 	player.die()
@@ -345,10 +343,7 @@ func _on_btn_continue_pressed():
 	GameState.level += 1
 	level_success.emit()
 	
-##############################
-##       LEVEL FACTORY      ##
-##############################
-	
+#region Level factory
 func generate_monsters():
 	monsters.clear()
 	
@@ -394,12 +389,9 @@ func add_monster(type, pos, delay):
 		new_monster.on_revive_monster.connect(revive_monster)
 		monsters.push_front(new_monster)
 		add_child(new_monster)
-		
-##############################
-##       CARDS EFFECTS      ##
-##############################
+#endregion
 
-
+#region Card Effects
 func activate_card(card):
 	print(card)
 	
@@ -467,3 +459,5 @@ func get_shields_gain():
 func get_reveal_number():
 	if is_combo_power() : return 6
 	else : return 4
+
+#endregion
