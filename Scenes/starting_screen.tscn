@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://2ufjkv0hu541"]
+
+[ext_resource type="Script" path="res://Scenes/starting_screen.gd" id="1_w380c"]
+[ext_resource type="Texture2D" uid="uid://d0h174kp8t6nj" path="res://Assets/Backgrounds/Sky.png" id="2_l5jl4"]
+[ext_resource type="Texture2D" uid="uid://da87i0w31bn1d" path="res://Assets/UI/GameTitle.png" id="2_tdgcx"]
+[ext_resource type="FontFile" uid="uid://hmsr1uee8lho" path="res://Assets/Fonts/Lato-Bold.ttf" id="4_gpaji"]
+
+[node name="StartingScreen" type="Node2D"]
+script = ExtResource("1_w380c")
+
+[node name="Sky" type="Sprite2D" parent="."]
+texture = ExtResource("2_l5jl4")
+centered = false
+
+[node name="GameTitle" type="Sprite2D" parent="."]
+position = Vector2(640, 819)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("2_tdgcx")
+centered = false
+offset = Vector2(-500, -800)
+
+[node name="Info" type="Label" parent="."]
+offset_left = 839.0
+offset_top = 32.0
+offset_right = 1259.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gpaji")
+theme_override_font_sizes/font_size = 26
+text = "2003 - Code and Art: Cirrus Minor"
+
+[node name="Usage" type="Label" parent="."]
+offset_left = 422.0
+offset_top = 646.0
+offset_right = 874.0
+offset_bottom = 687.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gpaji")
+theme_override_font_sizes/font_size = 33
+text = "Click anywhere to start game"
