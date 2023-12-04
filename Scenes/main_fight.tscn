@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://yuy7smhovixa"]
+[gd_scene load_steps=18 format=3 uid="uid://yuy7smhovixa"]
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
 [ext_resource type="Texture2D" uid="uid://ds0fu6j0sk2aq" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
@@ -8,8 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/game-over.gd" id="5_s6mcq"]
 [ext_resource type="FontFile" uid="uid://hmsr1uee8lho" path="res://Assets/Fonts/Lato-Bold.ttf" id="6_dr67a"]
 [ext_resource type="PackedScene" uid="uid://digo5e4v67p23" path="res://Scenes/unit_ui.tscn" id="6_ic78m"]
-[ext_resource type="Script" path="res://Scripts/LevelEndNewCard.gd" id="6_pflc5"]
-[ext_resource type="Texture2D" uid="uid://bmfh3n7uncfpd" path="res://Assets/UI/SingleUI.png" id="7_w8cjg"]
+[ext_resource type="Script" path="res://Scripts/level-new-card.gd" id="7_puo44"]
 [ext_resource type="AudioStream" uid="uid://dd34qbfve5hid" path="res://Assets/Sound/combo.wav" id="9_p8fuy"]
 [ext_resource type="AudioStream" uid="uid://u3tgirxpc0o3" path="res://Assets/Sound/combo_end.wav" id="10_lff2h"]
 [ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
@@ -98,7 +97,7 @@ text = "Exit
 
 [node name="LevelEndNewCard" type="Node2D" parent="."]
 visible = false
-script = ExtResource("6_pflc5")
+script = ExtResource("7_puo44")
 
 [node name="CardInfo" parent="LevelEndNewCard" instance=ExtResource("14_hkp2r")]
 position = Vector2(46, 112)
@@ -145,19 +144,11 @@ position = Vector2(-5, -4)
 
 [node name="HUD" type="Node2D" parent="."]
 
-[node name="MoneyUI" type="Sprite2D" parent="HUD"]
-position = Vector2(1169, 656)
-texture = ExtResource("7_w8cjg")
-
-[node name="LevelUI" type="Sprite2D" parent="HUD"]
-position = Vector2(1169, 557)
-texture = ExtResource("7_w8cjg")
-
 [node name="Level" type="Label" parent="HUD"]
 offset_left = 1105.0
-offset_top = 532.0
+offset_top = 541.0
 offset_right = 1219.0
-offset_bottom = 580.0
+offset_bottom = 589.0
 theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 32
 text = "LVL 12"
