@@ -80,6 +80,10 @@ func _physics_process(delta):
 			sprite.position = Vector2(0, 0)
 			is_starting = false
 			sprite_ui.show()
+	elif (sprite.position.x> 0):
+		sprite.position.x -= delta * 150
+		if (sprite.position.x < 0):
+			sprite.position.x = 0
 			
 	if is_dead && sprite.position.y < 0:
 		sprite.position.y += delta * velocity_y
@@ -105,8 +109,7 @@ func hurt(damages):
 			sound_coins.pitch_scale = randf_range(0.9, 1.1)
 			sound_coins.play()
 			GameState.add_money(bounty)
-			bounty = 0
-		
+			bounty = 0		
 		on_dying()
 	else:
 		on_hurting()
@@ -135,6 +138,7 @@ func on_dying():
 	hit_particles.emitting = true
 
 func on_hurting():
+	sprite.position.x += 25
 	hit_particles.process_material.direction = Vector3(-1, -0.5, 0)
 	hit_particles.emitting = true
 	
