@@ -1,0 +1,120 @@
+[gd_scene load_steps=14 format=3 uid="uid://own3rwwj2llk"]
+
+[ext_resource type="PackedScene" uid="uid://d057wcgaubavk" path="res://Scenes/monster_base.tscn" id="1_25ve5"]
+[ext_resource type="Script" path="res://Scripts/monster_04.gd" id="2_yu6kp"]
+[ext_resource type="Texture2D" uid="uid://dn4rk8s3r1o0k" path="res://Assets/Sprites/m04-sprites.png" id="3_uwij3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb0rk"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(0, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5v5o5"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(300, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqx2g"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(900, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alkmj"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(0, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1xtn"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(300, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0exv"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(600, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yroo"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(600, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6ms0"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(900, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8flg"]
+atlas = ExtResource("3_uwij3")
+region = Rect2(0, 600, 300, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qa64"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb0rk")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5v5o5")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqx2g")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_alkmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1xtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0exv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1xtn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yroo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6ms0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8flg")
+}],
+"loop": true,
+"name": &"power",
+"speed": 10.0
+}]
+
+[node name="MonsterTentacle" instance=ExtResource("1_25ve5")]
+script = ExtResource("2_yu6kp")
+damages = 1
+bounty = 20
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
+position = Vector2(-150, -301)
+sprite_frames = SubResource("SpriteFrames_0qa64")
+animation = &"power"
+autoplay = "idle"
+frame_progress = 0.196584
+centered = false
+
+[node name="UI" parent="Sprite" index="1"]
+position = Vector2(25, -20)
+
+[node name="HitParticles" parent="Sprite" index="2"]
+position = Vector2(-4, -66)
+
+[connection signal="animation_finished" from="Sprite/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

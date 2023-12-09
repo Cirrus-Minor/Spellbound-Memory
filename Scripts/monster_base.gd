@@ -27,6 +27,7 @@ var dead_monsters = 0 # how many dead monsters in the field? (for revive power)
 
 signal on_monster_attack(damages)
 signal on_revive_monster(amount)
+signal on_manipulate(amount)
 
 func _ready():
 	shields = shields_max
