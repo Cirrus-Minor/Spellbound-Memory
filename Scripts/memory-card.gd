@@ -146,6 +146,25 @@ func reveal_card(param_grid_index):
 		is_revealing = true
 		turn_card()
 
+func can_be_swapped():
+	return !is_turned && !is_revealing && !is_falling
+	
+func swap_cards(card1, card2):
+	if grid_index == card2:
+		card2 = card1
+		card1 = grid_index
+	
+	if grid_index != card1:
+		return
+
+	grid_index = card2
+	var x_array = grid_index % GameState.CARDS_PER_ROW
+	var y_array = grid_index / GameState.CARDS_PER_ROW
+	pos_target = Vector2(96 + (x_array) * 135, 92 + (y_array) * 133)
+	
+	var move_tween = get_tree().create_tween()
+	move_tween.tween_property(self, "position", pos_target, 0.4).set_trans(Tween.TRANS_CUBIC)
+	
 func make_fall():
 	timer_turn = 0.0
 	timer_turn_animation = 0.0

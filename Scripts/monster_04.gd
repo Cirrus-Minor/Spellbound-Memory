@@ -1,5 +1,7 @@
 extends MonsterBase
 
+@export var delay_power = 3.0
+
 @onready var anim = $Sprite/AnimatedSprite2D
 
 var timer_power = 0.0
@@ -21,7 +23,7 @@ func process_action():
 			super()
 			current_action = 2
 			sprite_item.frame = 2
-			timer_attack = timer_attack / 2
+			timer_attack = delay_power
 		2:
 			manipulate()
 			current_action = 1
