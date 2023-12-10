@@ -24,6 +24,10 @@ func init_card(new_frame):
 			text_title.text = "Fireball"
 			text_content.text = "The [b]Fireball[/b] is an attack spell that inflicts [b]5 damages[/b] to the first monster."
 			
+		2:
+			text_title.text = "Magic Missile"
+			text_content.text = "The [b]Magic Missile[/b] is an attack spell that inflicts [b]1 damage[/b] to the first monster."
+			
 		3:
 			text_title.text = "Thunder"
 			text_content.text = "The [b]Thunder[/b] is an area attack spell that inflicts [b]2 damages[/b] to each monster."
@@ -39,6 +43,10 @@ func init_card(new_frame):
 		6:
 			text_title.text = "Eye of the Wizard"
 			text_content.text = "The [b]Eye of the Wizard[/b] is a spell revealing [b]4 cards[/b]."
+			
+		7:
+			text_title.text = "Magic Shield"
+			text_content.text = "The [b]Magic Shield[/b] is an protective spell that regenerates [b]1 shield[/b]."
 			
 		8:
 			text_title.text = "Wealth"

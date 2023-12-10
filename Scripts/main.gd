@@ -22,20 +22,23 @@ func _unhandled_input(event):
 			
 func _on_start_game():
 	_start_screen.queue_free()
-	generate_fight_zone()
+	generate_fight_zone(true)
 			
 func _on_level_up():
 	_fight_zone.queue_free()
-	generate_fight_zone()
+	generate_fight_zone(false)
 
 func _on_game_over():
 	_fight_zone.queue_free()
-	generate_fight_zone()
+	generate_fight_zone(false)
 
-func generate_fight_zone():
+func generate_fight_zone(start_run):
 	_fight_zone = main_fight.instantiate()
 	_fight_zone.connect("level_success", _on_level_up)
 	_fight_zone.connect("game_over", _on_game_over)
+	if start_run:
+		_fight_zone.start_run()
+		
 	add_child(_fight_zone)
 
 func screenshot():

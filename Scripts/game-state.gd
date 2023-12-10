@@ -3,8 +3,8 @@ extends Node
 const CARDS_PER_ROW = 4
 const CARDS_NUMBER = 20
 
-# TODO Initial Deck
-@export var Deck = [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 5, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8];
+# Initial Deck
+@export var Deck = [];
 
 var player_health = 5
 var player_health_max = 5
@@ -31,7 +31,7 @@ func reset():
 	level = 1
 	money = 0
 	money_total = 0
-	Deck = [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7];
+	Deck = [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7];
 
 func add_money(gain):
 	money += gain

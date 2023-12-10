@@ -1,6 +1,7 @@
 extends Node2D
 
 enum Game_state {
+	Starting,
 	DealCards,
 	WaitForCard1,
 	WaitForCard2,
@@ -22,8 +23,9 @@ signal game_over
 @onready var player_ui = $UnitUI
 @onready var level_text = $HUD/Level
 @onready var money_text = $HUD/Money
-@onready var game_over_ui = $GameOver
-@onready var next_level_new_card_ui = $LevelEndNewCard
+@onready var game_over_ui = $Interface/GameOver
+@onready var next_level_new_card_ui = $Interface/LevelEndNewCard
+@onready var start_run_ui = $Interface/StartRunScreen
 @onready var sound_combo = $Sounds/Combo
 @onready var sound_combo_end = $Sounds/ComboEnd
 @onready var sound_cards_deal = $Sounds/CardsDeal
@@ -64,6 +66,23 @@ var player_shields_max = 3
 
 var monsters = []
 
+func start_level():
+	generate_monsters()
+	update_combo(0)
+	state = Game_state.WaitForCard1
+	full_deck = GameState.Deck.duplicate()
+	rest_deck = full_deck.duplicate()
+	for n in 20:
+		remaining_places.push_back(n)
+	process_cards(4)
+	
+func start_run():
+	state = Game_state.Starting
+	
+func _on_btn_start_pressed():
+	start_run_ui.hide()
+	start_level()
+	
 func _ready():
 	player_health = GameState.player_health
 	player_health_max = GameState.player_health_max
@@ -73,18 +92,13 @@ func _ready():
 	
 	level_text.text = "LVL " + str(GameState.level)
 	money_display = GameState.money
+	combo_text.hide()
+	combo_effect_sprite.hide()
 	
-	generate_monsters()
-
-	update_combo(0)
-	state = Game_state.WaitForCard1
-	full_deck = GameState.Deck.duplicate()
-	rest_deck = full_deck.duplicate()
-	
-	for n in 20:
-		remaining_places.push_back(n)
-
-	process_cards(4)
+	if state == Game_state.Starting:
+		start_run_ui.show()
+	else:
+		start_level()
 	
 func _process(delta):
 	if money_display < GameState.money: money_display += 1
