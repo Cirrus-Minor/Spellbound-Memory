@@ -93,7 +93,7 @@ func _ready():
 	level_text.text = "LVL " + str(GameState.level)
 	money_display = GameState.money
 	combo_text.hide()
-	combo_effect_sprite.hide()
+	#combo_effect_sprite.hide()
 	
 	if state == Game_state.Starting:
 		start_run_ui.show()
@@ -106,7 +106,7 @@ func _process(delta):
 	money_text.text = "$ " + str(money_display)
 	
 func _physics_process(delta):
-	combo_effect_sprite.modulate.a = 0.75 + 0.25 * sin(Time.get_ticks_msec() / 200 )
+	combo_effect_sprite.rotation_degrees += delta * 30
 		
 func process_cards(cards_to_reveal):
 	# clear cards to display

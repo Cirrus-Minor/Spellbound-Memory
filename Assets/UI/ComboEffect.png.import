@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbm45o5apvn8h"
-path="res://.godot/imported/background.png-ce0695ad49900553c0e5544d3394c85e.ctex"
+uid="uid://bbsuaibtxqffa"
+path="res://.godot/imported/ComboEffect.png-e41e1bf3a74613ec76b06c656e274532.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backgrounds/background.png"
-dest_files=["res://.godot/imported/background.png-ce0695ad49900553c0e5544d3394c85e.ctex"]
+source_file="res://Assets/UI/ComboEffect.png"
+dest_files=["res://.godot/imported/ComboEffect.png-e41e1bf3a74613ec76b06c656e274532.ctex"]
 
 [params]
 

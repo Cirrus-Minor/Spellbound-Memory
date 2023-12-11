@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://yuy7smhovixa"]
+[gd_scene load_steps=21 format=3 uid="uid://yuy7smhovixa"]
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
-[ext_resource type="Texture2D" uid="uid://ds0fu6j0sk2aq" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
+[ext_resource type="Texture2D" uid="uid://dbm45o5apvn8h" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
 [ext_resource type="Texture2D" uid="uid://d2aer5wtb1oem" path="res://Assets/Cards/combo_effect.png" id="3_hdsbb"]
 [ext_resource type="Texture2D" uid="uid://bdek2qenbuvmt" path="res://Assets/Cards/cardset.png" id="3_nlr24"]
+[ext_resource type="Texture2D" uid="uid://bbsuaibtxqffa" path="res://Assets/UI/ComboEffect.png" id="3_y7ggx"]
 [ext_resource type="PackedScene" uid="uid://eae21bejlvma" path="res://Scenes/player.tscn" id="4_yabtv"]
 [ext_resource type="Script" path="res://Scripts/game-over.gd" id="5_s6mcq"]
 [ext_resource type="FontFile" uid="uid://hmsr1uee8lho" path="res://Assets/Fonts/Lato-Bold.ttf" id="6_dr67a"]
@@ -33,7 +34,8 @@ centered = false
 position = Vector2(700, 580)
 
 [node name="ComboEffect" type="Sprite2D" parent="CardStack"]
-texture = ExtResource("3_hdsbb")
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_y7ggx")
 
 [node name="CardSprite" type="Sprite2D" parent="CardStack"]
 texture = ExtResource("3_nlr24")
