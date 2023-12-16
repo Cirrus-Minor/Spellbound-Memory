@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b74ncmnj7sha1"]
+[gd_scene load_steps=3 format=3 uid="uid://b74ncmnj7sha1"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_5brvr"]
+[ext_resource type="AudioStream" uid="uid://dpl52wga0na0n" path="res://Assets/Music/Spellbound Symphony.ogg" id="2_kcm7r"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_5brvr")
+
+[node name="Music" type="Node" parent="."]
+
+[node name="MainMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("2_kcm7r")
+volume_db = 7.0

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://2ufjkv0hu541"]
+[gd_scene load_steps=6 format=3 uid="uid://2ufjkv0hu541"]
 
 [ext_resource type="Script" path="res://Scripts/starting_screen.gd" id="1_np8x6"]
 [ext_resource type="Texture2D" uid="uid://d0h174kp8t6nj" path="res://Assets/Backgrounds/Sky.png" id="2_l5jl4"]
 [ext_resource type="Texture2D" uid="uid://da87i0w31bn1d" path="res://Assets/UI/GameTitle.png" id="2_tdgcx"]
 [ext_resource type="FontFile" uid="uid://hmsr1uee8lho" path="res://Assets/Fonts/Lato-Bold.ttf" id="4_gpaji"]
+[ext_resource type="AudioStream" uid="uid://dm0siy10eoij8" path="res://Assets/Music/Spellbound Overture.ogg" id="5_u7wch"]
 
 [node name="StartingScreen" type="Node2D"]
 script = ExtResource("1_np8x6")
@@ -38,3 +39,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_gpaji")
 theme_override_font_sizes/font_size = 33
 text = "Click anywhere to start game"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_u7wch")
+volume_db = 7.0
+autoplay = true

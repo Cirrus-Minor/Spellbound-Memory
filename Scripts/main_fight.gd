@@ -26,8 +26,17 @@ signal game_over
 @onready var game_over_ui = $Interface/GameOver
 @onready var next_level_new_card_ui = $Interface/LevelEndNewCard
 @onready var start_run_ui = $Interface/StartRunScreen
-@onready var sound_combo = $Sounds/Combo
 @onready var sound_combo_end = $Sounds/ComboEnd
+@onready var sound_combo_01 = $Sounds/Combo/Combo01
+@onready var sound_combo_02 = $Sounds/Combo/Combo02
+@onready var sound_combo_03 = $Sounds/Combo/Combo03
+@onready var sound_combo_04 = $Sounds/Combo/Combo04
+@onready var sound_combo_05 = $Sounds/Combo/Combo05
+@onready var sound_combo_06 = $Sounds/Combo/Combo06
+@onready var sound_combo_07 = $Sounds/Combo/Combo07
+@onready var sound_combo_08 = $Sounds/Combo/Combo08
+@onready var sound_combo_09 = $Sounds/Combo/Combo09
+@onready var sound_combo_10 = $Sounds/Combo/Combo10
 @onready var sound_cards_deal = $Sounds/CardsDeal
 @onready var sound_card_turn = $Sounds/CardTurn
 @onready var sound_revive = $Sounds/Revive
@@ -92,8 +101,8 @@ func _ready():
 	
 	level_text.text = "LVL " + str(GameState.level)
 	money_display = GameState.money
-	combo_text.hide()
-	#combo_effect_sprite.hide()
+	combo_text.text = ""
+	combo_effect_sprite.hide()
 	
 	if state == Game_state.Starting:
 		start_run_ui.show()
@@ -245,7 +254,7 @@ func reveal_cards(n):
 func update_combo(new_combo):
 	if combo > 0 && new_combo == 0:
 		sound_combo_end.play()
-		sound_combo.pitch_scale = 0.8
+
 	combo = new_combo
 	if (combo < 3):
 		combo_text.text = ""
@@ -257,12 +266,27 @@ func update_combo(new_combo):
 		sound_coin.play()
 		
 	if combo > 0:
-		sound_combo.play()
-		sound_combo.pitch_scale += 0.1
+		play_combo_sound(combo)
 
 func is_combo_power():
 	return combo > 3
 
+func play_combo_sound(combo):
+	print(combo)
+	match combo:
+		1: sound_combo_01.play()
+		2: sound_combo_02.play()
+		3: sound_combo_03.play()
+		4: sound_combo_04.play()
+		5: sound_combo_05.play()
+		6: sound_combo_06.play()
+		7: sound_combo_07.play()
+		8: sound_combo_08.play()
+		9: sound_combo_09.play()
+		_:
+			if combo % 2 == 0 : sound_combo_10.play()
+			else : sound_combo_09.play()
+			
 func _on_monster_attack(damages):
 	if player_health < 1:
 		return

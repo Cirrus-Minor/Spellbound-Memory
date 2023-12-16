@@ -3,6 +3,8 @@ extends Node2D
 var start_screen = preload("res://Scenes/starting_screen.tscn")
 var main_fight = preload("res://Scenes/main_fight.tscn")
 
+@onready var main_music = $Music/MainMusic
+
 var _start_screen
 var _fight_zone
 
@@ -22,6 +24,7 @@ func _unhandled_input(event):
 			
 func _on_start_game():
 	_start_screen.queue_free()
+	main_music.play()
 	generate_fight_zone(true)
 			
 func _on_level_up():
@@ -30,6 +33,7 @@ func _on_level_up():
 
 func _on_game_over():
 	_fight_zone.queue_free()
+	main_music.stop()
 	generate_fight_zone(false)
 
 func generate_fight_zone(start_run):

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dd34qbfve5hid"
-path="res://.godot/imported/combo.wav-d95429de4d8ce1bab4c94f728d9f9b1a.sample"
+uid="uid://cr6aslcaibkhx"
+path="res://.godot/imported/combo04.wav-bd269a83c32eecc096233383f665afb0.sample"
 
 [deps]
 
-source_file="res://Assets/Sound/combo.wav"
-dest_files=["res://.godot/imported/combo.wav-d95429de4d8ce1bab4c94f728d9f9b1a.sample"]
+source_file="res://Assets/Sound/Combo/combo04.wav"
+dest_files=["res://.godot/imported/combo04.wav-bd269a83c32eecc096233383f665afb0.sample"]
 
 [params]
 

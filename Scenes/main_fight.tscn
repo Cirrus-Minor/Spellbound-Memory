@@ -1,7 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://yuy7smhovixa"]
+[gd_scene load_steps=30 format=3 uid="uid://yuy7smhovixa"]
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
-[ext_resource type="Texture2D" uid="uid://dbm45o5apvn8h" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
+[ext_resource type="Texture2D" uid="uid://g8uawuju0qn2" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
 [ext_resource type="Texture2D" uid="uid://d2aer5wtb1oem" path="res://Assets/Cards/combo_effect.png" id="3_hdsbb"]
 [ext_resource type="Texture2D" uid="uid://bdek2qenbuvmt" path="res://Assets/Cards/cardset.png" id="3_nlr24"]
 [ext_resource type="Texture2D" uid="uid://bbsuaibtxqffa" path="res://Assets/UI/ComboEffect.png" id="3_y7ggx"]
@@ -10,7 +10,6 @@
 [ext_resource type="FontFile" uid="uid://hmsr1uee8lho" path="res://Assets/Fonts/Lato-Bold.ttf" id="6_dr67a"]
 [ext_resource type="PackedScene" uid="uid://digo5e4v67p23" path="res://Scenes/unit_ui.tscn" id="6_ic78m"]
 [ext_resource type="Script" path="res://Scripts/level-new-card.gd" id="7_puo44"]
-[ext_resource type="AudioStream" uid="uid://dd34qbfve5hid" path="res://Assets/Sound/combo.wav" id="9_p8fuy"]
 [ext_resource type="Script" path="res://Scripts/start_run_screen.gd" id="9_pcga4"]
 [ext_resource type="AudioStream" uid="uid://u3tgirxpc0o3" path="res://Assets/Sound/combo_end.wav" id="10_lff2h"]
 [ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
@@ -19,6 +18,16 @@
 [ext_resource type="AudioStream" uid="uid://dg6nvtll1udlo" path="res://Assets/Sound/coins_02.wav" id="13_yttod"]
 [ext_resource type="PackedScene" uid="uid://5mepquwbookt" path="res://Scenes/card_info.tscn" id="14_hkp2r"]
 [ext_resource type="AudioStream" uid="uid://soe77tbpedc1" path="res://Assets/Sound/coins_03.wav" id="14_i6xgg"]
+[ext_resource type="AudioStream" uid="uid://c1xso3n02ctax" path="res://Assets/Sound/Combo/combo01.wav" id="19_uxvm2"]
+[ext_resource type="AudioStream" uid="uid://cuqmgcoghtweq" path="res://Assets/Sound/Combo/combo02.wav" id="20_i6eei"]
+[ext_resource type="AudioStream" uid="uid://bopqhxg1ji4au" path="res://Assets/Sound/Combo/combo03.wav" id="21_lwuc2"]
+[ext_resource type="AudioStream" uid="uid://cr6aslcaibkhx" path="res://Assets/Sound/Combo/combo04.wav" id="22_mvwl5"]
+[ext_resource type="AudioStream" uid="uid://d2380dirwrbkh" path="res://Assets/Sound/Combo/combo05.wav" id="23_vtriv"]
+[ext_resource type="AudioStream" uid="uid://bdycpmwr34wsj" path="res://Assets/Sound/Combo/combo06.wav" id="24_csaa2"]
+[ext_resource type="AudioStream" uid="uid://7cef70hvyg2k" path="res://Assets/Sound/Combo/combo07.wav" id="25_7a47i"]
+[ext_resource type="AudioStream" uid="uid://d3s57bo46f2d3" path="res://Assets/Sound/Combo/combo08.wav" id="26_uqon1"]
+[ext_resource type="AudioStream" uid="uid://bwhp5u1gq4g7w" path="res://Assets/Sound/Combo/combo09.wav" id="27_bvi1u"]
+[ext_resource type="AudioStream" uid="uid://bja37ct6n6wg" path="res://Assets/Sound/Combo/combo10.wav" id="28_m326u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_widny"]
 size = Vector2(92, 90.5)
@@ -296,11 +305,6 @@ text = "$ 1250"
 
 [node name="Sounds" type="Node" parent="."]
 
-[node name="Combo" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("9_p8fuy")
-volume_db = -8.0
-pitch_scale = 0.8
-
 [node name="ComboEnd" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("10_lff2h")
 volume_db = -8.0
@@ -322,6 +326,38 @@ volume_db = -15.0
 stream = ExtResource("13_tgsfq")
 volume_db = -8.0
 pitch_scale = 0.8
+
+[node name="Combo" type="Node" parent="Sounds"]
+
+[node name="Combo01" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("19_uxvm2")
+
+[node name="Combo02" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("20_i6eei")
+
+[node name="Combo03" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("21_lwuc2")
+
+[node name="Combo04" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("22_mvwl5")
+
+[node name="Combo05" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("23_vtriv")
+
+[node name="Combo06" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("24_csaa2")
+
+[node name="Combo07" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("25_7a47i")
+
+[node name="Combo08" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("26_uqon1")
+
+[node name="Combo09" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("27_bvi1u")
+
+[node name="Combo10" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("28_m326u")
 
 [connection signal="pressed" from="Interface/GameOver/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
 [connection signal="pressed" from="Interface/GameOver/BtnExit" to="." method="_on_btn_exit_pressed"]
