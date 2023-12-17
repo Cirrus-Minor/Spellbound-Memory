@@ -15,4 +15,3 @@ volume_db = 7.0
 
 [node name="GameOverMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("3_i2aso")
-volume_db = 7.0
