@@ -307,7 +307,7 @@ text = "$ 1250"
 
 [node name="ComboEnd" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("10_lff2h")
-volume_db = -8.0
+volume_db = 2.0
 
 [node name="Coin" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("13_yttod")
