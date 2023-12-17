@@ -4,6 +4,7 @@ var start_screen = preload("res://Scenes/starting_screen.tscn")
 var main_fight = preload("res://Scenes/main_fight.tscn")
 
 @onready var main_music = $Music/MainMusic
+@onready var game_over_music = $Music/GameOverMusic
 
 var _start_screen
 var _fight_zone
@@ -31,14 +32,20 @@ func _on_level_up():
 	_fight_zone.queue_free()
 	generate_fight_zone(false)
 
-func _on_game_over():
+func _on_restart_game():
 	_fight_zone.queue_free()
-	main_music.stop()
+	game_over_music.stop()
+	main_music.play()
 	generate_fight_zone(false)
+
+func _on_game_over():
+	main_music.stop()
+	game_over_music.play()
 
 func generate_fight_zone(start_run):
 	_fight_zone = main_fight.instantiate()
 	_fight_zone.connect("level_success", _on_level_up)
+	_fight_zone.connect("restart_game", _on_restart_game)
 	_fight_zone.connect("game_over", _on_game_over)
 	if start_run:
 		_fight_zone.start_run()

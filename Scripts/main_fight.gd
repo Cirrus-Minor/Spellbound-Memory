@@ -15,6 +15,7 @@ const monster_pos_2 = 1050
 const monster_pos_3 = 900
 
 signal level_success
+signal restart_game
 signal game_over
 
 @onready var combo_text = $CardStack/ComboText
@@ -376,10 +377,11 @@ func process_game_over():
 	get_tree().call_group("cards", "make_fall")
 	state = Game_state.GameOver
 	game_over_ui._show_with_score(GameState.money_total)
+	game_over.emit()
 	
 func _on_btn_play_again_pressed():
 	GameState.reset()
-	game_over.emit()
+	restart_game.emit()
 
 func _on_btn_exit_pressed():
 	get_tree().quit()

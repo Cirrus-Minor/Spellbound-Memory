@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cd1o382hm2gwr"
+path="res://.godot/imported/Spellbound GameOver.ogg-c3349961ac9662fbec0b17f391d84874.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Music/Spellbound GameOver.ogg"
+dest_files=["res://.godot/imported/Spellbound GameOver.ogg-c3349961ac9662fbec0b17f391d84874.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
