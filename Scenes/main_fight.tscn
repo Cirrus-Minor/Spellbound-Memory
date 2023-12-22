@@ -68,48 +68,114 @@ visible = false
 script = ExtResource("5_s6mcq")
 
 [node name="TextGameOver" type="Label" parent="Interface/GameOver"]
-offset_left = 109.0
-offset_top = 93.0
-offset_right = 500.0
-offset_bottom = 195.0
+offset_left = 116.0
+offset_top = 30.0
+offset_right = 507.0
+offset_bottom = 116.0
 theme_override_fonts/font = ExtResource("6_dr67a")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 60
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="TextFinalScore" type="Label" parent="Interface/GameOver"]
-offset_left = 105.0
-offset_top = 264.0
-offset_right = 496.0
-offset_bottom = 404.0
-theme_override_fonts/font = ExtResource("6_dr67a")
-theme_override_font_sizes/font_size = 48
-text = "Your score:
-1200"
-horizontal_alignment = 1
+[node name="HiScores" type="Node2D" parent="Interface/GameOver"]
+visible = false
 
-[node name="BtnPlayAgain" type="Button" parent="Interface/GameOver"]
-offset_left = 193.0
-offset_top = 494.0
-offset_right = 436.0
-offset_bottom = 569.0
+[node name="TextIndexes" type="Label" parent="Interface/GameOver/HiScores"]
+offset_left = 70.0
+offset_top = 210.0
+offset_right = 111.0
+offset_bottom = 462.0
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 39
+text = "1
+2
+3
+4
+5"
+
+[node name="TextNames" type="Label" parent="Interface/GameOver/HiScores"]
+offset_left = 115.0
+offset_top = 210.0
+offset_right = 408.0
+offset_bottom = 462.0
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 39
+text = "Baba
+Bibi
+Bobo
+Bubu
+Byby"
+
+[node name="TextScores" type="Label" parent="Interface/GameOver/HiScores"]
+offset_left = 412.0
+offset_top = 210.0
+offset_right = 535.0
+offset_bottom = 462.0
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 39
+text = "100
+200
+300
+400
+500"
+horizontal_alignment = 2
+
+[node name="BtnPlayAgain" type="Button" parent="Interface/GameOver/HiScores"]
+offset_left = 55.0
+offset_top = 589.0
+offset_right = 298.0
+offset_bottom = 664.0
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
 text = "Play again"
 
-[node name="BtnExit" type="Button" parent="Interface/GameOver"]
-offset_left = 191.0
-offset_top = 593.0
-offset_right = 434.0
-offset_bottom = 668.0
+[node name="BtnExit" type="Button" parent="Interface/GameOver/HiScores"]
+offset_left = 308.0
+offset_top = 589.0
+offset_right = 551.0
+offset_bottom = 664.0
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
 text = "Exit
 "
+
+[node name="EnterName" type="Node2D" parent="Interface/GameOver"]
+visible = false
+position = Vector2(14, -118)
+
+[node name="BtnSubmitName" type="Button" parent="Interface/GameOver/EnterName"]
+offset_left = 414.0
+offset_top = 354.0
+offset_right = 514.0
+offset_bottom = 413.0
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 36
+toggle_mode = true
+text = "OK"
+
+[node name="EnterNameLabel" type="Label" parent="Interface/GameOver/EnterName"]
+offset_left = 55.0
+offset_top = 237.0
+offset_right = 528.0
+offset_bottom = 336.0
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 39
+text = "You are in the Hall of
+Fame! Enter your name:"
+horizontal_alignment = 1
+
+[node name="NameEdit" type="LineEdit" parent="Interface/GameOver/EnterName"]
+offset_left = 54.0
+offset_top = 355.0
+offset_right = 397.0
+offset_bottom = 412.0
+theme_override_font_sizes/font_size = 35
+text = "Player"
 
 [node name="LevelEndNewCard" type="Node2D" parent="Interface"]
 visible = false
@@ -359,8 +425,9 @@ stream = ExtResource("27_bvi1u")
 [node name="Combo10" type="AudioStreamPlayer" parent="Sounds/Combo"]
 stream = ExtResource("28_m326u")
 
-[connection signal="pressed" from="Interface/GameOver/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
-[connection signal="pressed" from="Interface/GameOver/BtnExit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="Interface/GameOver/HiScores/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
+[connection signal="pressed" from="Interface/GameOver/HiScores/BtnExit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="Interface/GameOver/EnterName/BtnSubmitName" to="Interface/GameOver" method="_on_btn_submit_name_pressed"]
 [connection signal="pressed" from="Interface/LevelEndNewCard/Label/BtnContinue" to="." method="_on_btn_continue_pressed"]
 [connection signal="pressed" from="Interface/LevelEndNewCard/Label/BtnExit" to="." method="_on_btn_exit_pressed"]
 [connection signal="pressed" from="Interface/StartRunScreen/Label/BtnStart" to="." method="_on_btn_start_pressed"]
