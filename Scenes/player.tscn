@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://eae21bejlvma"]
+[gd_scene load_steps=24 format=3 uid="uid://eae21bejlvma"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_haifg"]
 [ext_resource type="Texture2D" uid="uid://dojpfn16xvpwa" path="res://Assets/Sprites/shield.png" id="3_h3jjv"]
@@ -7,6 +7,9 @@
 [ext_resource type="AudioStream" uid="uid://bsr2ss3uk8046" path="res://Assets/Sound/player_attack.wav" id="5_1w4ka"]
 [ext_resource type="AudioStream" uid="uid://b7ppwn7genkqa" path="res://Assets/Sound/player_hurt.wav" id="6_wa5na"]
 [ext_resource type="AudioStream" uid="uid://54xt1vc5epu2" path="res://Assets/Sound/shield.wav" id="7_traed"]
+[ext_resource type="Texture2D" uid="uid://cghntij100k8h" path="res://Assets/Effects/attack_fire.png" id="8_ueukw"]
+[ext_resource type="Texture2D" uid="uid://djxjdidtmhx" path="res://Assets/Effects/attack_missile.png" id="9_ps5c3"]
+[ext_resource type="Texture2D" uid="uid://do25n8evf5yow" path="res://Assets/Effects/attack_bolt.png" id="10_3bp6c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbk3x"]
 size = Vector2(93.4211, 179.829)
@@ -103,6 +106,41 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ouhmp"]
+particle_flag_disable_z = true
+angle_min = -108.0
+angle_max = 24.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.45
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pmcw4"]
+particle_flag_disable_z = true
+angle_min = -84.0
+angle_max = -48.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.15
+scale_max = 0.35
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sacur"]
+particle_flag_disable_z = true
+angle_min = -60.0
+angle_max = -36.0
+direction = Vector3(1, -0.5, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+
 [node name="Player" type="Area2D"]
 scale = Vector2(0.76, 0.76)
 script = ExtResource("1_haifg")
@@ -114,7 +152,7 @@ shape = SubResource("RectangleShape2D_jbk3x")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-78.9473, -200)
 sprite_frames = SubResource("SpriteFrames_c6rwi")
-animation = &"victory"
+animation = &"attack"
 autoplay = "idle"
 centered = false
 
@@ -123,9 +161,6 @@ visible = false
 position = Vector2(97.3684, -102.632)
 scale = Vector2(1.2, 1.187)
 texture = ExtResource("3_h3jjv")
-
-[node name="HitParticles" parent="." instance=ExtResource("4_2g18j")]
-position = Vector2(32.8947, -118.421)
 
 [node name="Sounds" type="Node" parent="."]
 
@@ -139,5 +174,38 @@ stream = ExtResource("6_wa5na")
 stream = ExtResource("7_traed")
 volume_db = -5.333
 pitch_scale = 1.51
+
+[node name="HitParticles" parent="." instance=ExtResource("4_2g18j")]
+position = Vector2(32.8947, -118.421)
+
+[node name="FireAttack" type="GPUParticles2D" parent="."]
+position = Vector2(110.526, -105.263)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_ouhmp")
+texture = ExtResource("8_ueukw")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.5
+randomness = 1.0
+
+[node name="MissileAttack" type="GPUParticles2D" parent="."]
+position = Vector2(110.526, -107.895)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_pmcw4")
+texture = ExtResource("9_ps5c3")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.62
+
+[node name="BoltAttack" type="GPUParticles2D" parent="."]
+position = Vector2(113.158, -103.947)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_sacur")
+texture = ExtResource("10_3bp6c")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.58
+randomness = 0.28
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

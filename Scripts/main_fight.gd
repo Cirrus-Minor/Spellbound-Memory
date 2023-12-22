@@ -463,15 +463,15 @@ func activate_card(card):
 	
 	match card:
 		1: # Fireball
-			player.attack()
+			player.attack(2)
 			attack_monster(get_damages_fireball(), false)
 			
 		2: # Magic Missile
-			player.attack()
+			player.attack(1)
 			attack_monster(get_damages_missile(), false)
 			
 		3: # Lightning
-			player.attack()
+			player.attack(3)
 			attack_monster(get_damages_lightning(), true)
 			
 		4: # Hand

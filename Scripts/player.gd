@@ -3,6 +3,9 @@ extends Area2D
 @onready var sprite = $AnimatedSprite2D
 @onready var shield_sprite = $Shield
 @onready var hit_paticles = $HitParticles
+@onready var fire_paticles = $FireAttack
+@onready var missile_paticles = $MissileAttack
+@onready var bolt_paticles = $BoltAttack
 
 @onready var sound_attack = $Sounds/Attack
 @onready var sound_hurt = $Sounds/Hurt
@@ -50,12 +53,21 @@ func shield():
 	sound_shield.pitch_scale = randf_range(1.2, 1.8)
 	sound_shield.play()
 	
-func attack():
+func attack(attack_type):
 	sprite.play("attack")
+	var particles
+	match attack_type:
+		1: particles = missile_paticles
+		2: particles = fire_paticles
+		3: particles = bolt_paticles
+		
+	particles.process_material.direction = Vector3(1, 0, 0)
+	particles.emitting = true
 	sound_attack.pitch_scale = randf_range(0.9, 1.5)
 	sound_attack.play()
 	
 func victory():
+	await get_tree().create_timer(0.5).timeout
 	is_victory = true
 	sprite.play("victory")
 	velocity = -800
