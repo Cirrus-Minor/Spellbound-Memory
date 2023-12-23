@@ -84,7 +84,7 @@ damages = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
 position = Vector2(-99, -203)
 sprite_frames = SubResource("SpriteFrames_kcrbn")
-animation = &"idle"
+animation = &"die"
 autoplay = "idle"
 centered = false
 
