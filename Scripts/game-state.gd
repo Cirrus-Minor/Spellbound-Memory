@@ -78,8 +78,11 @@ func load_scores():
 	var save_game = FileAccess.open("user://scores.sav", FileAccess.READ)
 	var json_string = save_game.get_as_text()
 	hi_scores = JSON.parse_string(json_string)
+	if hi_scores == null || hi_scores.size() < 5:
+		generate_score_data()
 		
 func generate_score_data():
+	hi_scores = []
 	var record = score_record.new("Sylvea", 250, 7)
 	hi_scores.push_back(record)
 	record = score_record.new("Nym", 200, 6)

@@ -37,7 +37,7 @@ stream = ExtResource("5_u7wch")
 volume_db = 7.0
 autoplay = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Usage" type="RichTextLabel" parent="."]
 offset_left = 406.0
 offset_top = 651.0
 offset_right = 870.0

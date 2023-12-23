@@ -80,46 +80,6 @@ horizontal_alignment = 1
 [node name="HiScores" type="Node2D" parent="Interface/GameOver"]
 visible = false
 
-[node name="TextIndexes" type="Label" parent="Interface/GameOver/HiScores"]
-offset_left = 70.0
-offset_top = 210.0
-offset_right = 111.0
-offset_bottom = 462.0
-theme_override_fonts/font = ExtResource("6_dr67a")
-theme_override_font_sizes/font_size = 39
-text = "1
-2
-3
-4
-5"
-
-[node name="TextNames" type="Label" parent="Interface/GameOver/HiScores"]
-offset_left = 115.0
-offset_top = 210.0
-offset_right = 408.0
-offset_bottom = 462.0
-theme_override_fonts/font = ExtResource("6_dr67a")
-theme_override_font_sizes/font_size = 39
-text = "Baba
-Bibi
-Bobo
-Bubu
-Byby"
-
-[node name="TextScores" type="Label" parent="Interface/GameOver/HiScores"]
-offset_left = 412.0
-offset_top = 210.0
-offset_right = 535.0
-offset_bottom = 462.0
-theme_override_fonts/font = ExtResource("6_dr67a")
-theme_override_font_sizes/font_size = 39
-text = "100
-200
-300
-400
-500"
-horizontal_alignment = 2
-
 [node name="BtnPlayAgain" type="Button" parent="Interface/GameOver/HiScores"]
 offset_left = 55.0
 offset_top = 589.0
@@ -141,6 +101,53 @@ theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
 text = "Exit
+"
+
+[node name="ListIndexes" type="RichTextLabel" parent="Interface/GameOver/HiScores"]
+offset_left = 68.0
+offset_top = 210.0
+offset_right = 119.0
+offset_bottom = 494.0
+theme_override_constants/line_separation = 8
+theme_override_fonts/normal_font = ExtResource("6_dr67a")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "1
+2
+3
+4
+5"
+
+[node name="ListNames" type="RichTextLabel" parent="Interface/GameOver/HiScores"]
+offset_left = 139.0
+offset_top = 210.0
+offset_right = 423.0
+offset_bottom = 488.0
+theme_override_constants/line_separation = 8
+theme_override_fonts/normal_font = ExtResource("6_dr67a")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "Baba
+[shake rate=20.0 level=5 connected=1][rainbow freq=0.6 sat=0.6 val=0.8]Bibi[/rainbow][/shake]
+Bobo
+Bubu
+Byby
+"
+
+[node name="ListScores" type="RichTextLabel" parent="Interface/GameOver/HiScores"]
+offset_left = 414.0
+offset_top = 210.0
+offset_right = 548.0
+offset_bottom = 488.0
+theme_override_constants/line_separation = 8
+theme_override_fonts/normal_font = ExtResource("6_dr67a")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[right]25500[/right]
+[right]2398[/right]
+[right]124[/right]
+[right]28[/right]
+[right]20[/right]
 "
 
 [node name="EnterName" type="Node2D" parent="Interface/GameOver"]
@@ -176,6 +183,7 @@ offset_right = 397.0
 offset_bottom = 412.0
 theme_override_font_sizes/font_size = 35
 text = "Player"
+max_length = 14
 
 [node name="LevelEndNewCard" type="Node2D" parent="Interface"]
 visible = false
