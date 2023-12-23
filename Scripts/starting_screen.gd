@@ -19,5 +19,4 @@ func _physics_process(delta):
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.button_index == 1 && event.pressed:
-		print("emit_start")
 		start_game.emit()

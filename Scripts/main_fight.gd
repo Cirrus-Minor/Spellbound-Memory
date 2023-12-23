@@ -273,7 +273,6 @@ func is_combo_power():
 	return combo > 3
 
 func play_combo_sound(combo):
-	print(combo)
 	match combo:
 		1: sound_combo_01.play()
 		2: sound_combo_02.play()
@@ -459,8 +458,6 @@ func add_monster(type, pos, delay):
 
 #region Card Effects
 func activate_card(card):
-	print(card)
-	
 	match card:
 		1: # Fireball
 			player.attack(2)
