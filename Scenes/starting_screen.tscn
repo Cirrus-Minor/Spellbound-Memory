@@ -22,7 +22,7 @@ centered = false
 offset = Vector2(-500, -800)
 
 [node name="Info" type="Label" parent="."]
-offset_left = 671.0
+offset_left = 400.0
 offset_top = 30.0
 offset_right = 1258.0
 offset_bottom = 67.0

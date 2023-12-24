@@ -3,9 +3,11 @@ extends Node2D
 signal start_game
 
 @onready var titleSprite = $"GameTitle"
+@onready var info_text = $Info
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	info_text.text = "Version " + GameState.VERSION + " (2023) - Code, 2D art and music: " + GameState.AUTHOR
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

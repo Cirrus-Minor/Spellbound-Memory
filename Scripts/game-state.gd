@@ -1,5 +1,8 @@
 extends Node
 
+const VERSION = "0.4.0"
+const AUTHOR = "Cirrus Minor"
+
 const CARDS_PER_ROW = 4
 const CARDS_NUMBER = 20
 
