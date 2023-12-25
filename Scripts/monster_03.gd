@@ -2,6 +2,13 @@ extends MonsterBase
 
 @onready var anim = $Sprite/AnimatedSprite2D
 
+@onready var sound_attack_1 = $Sounds/Attack1
+@onready var sound_attack_2 = $Sounds/Attack2
+@onready var sound_hurt_1 = $Sounds/Hurt1
+@onready var sound_hurt_2 = $Sounds/Hurt2
+@onready var sound_die = $Sounds/Die
+@onready var sound_revive = $Sounds/Revive
+
 var timer_power = 0.0
 
 # 1 = attack
@@ -34,18 +41,32 @@ func next_action():
 
 func revive_monster():
 	on_revive_monster.emit(1)
+	sound_revive.pitch_scale = randf_range(0.9, 1.1)
+	sound_revive.play()
 	on_power()
 
 func on_dying():
 	super()
 	anim.play("die")
+	await get_tree().create_timer(0.2).timeout
+	sound_die.pitch_scale = randf_range(0.9, 1.1)
+	sound_die.play()
 
 func on_hurting():
 	super()
 	anim.play("hurt")
+	var sound = sound_hurt_1
+	if randi_range(1, 2) == 2: sound = sound_hurt_2
+	await get_tree().create_timer(0.2).timeout
+	sound.pitch_scale = randf_range(1.1, 1.1)
+	sound.play()
 	
 func on_attack():
 	anim.play("attack")
+	var sound = sound_attack_1
+	if randi_range(1, 2) == 2: sound = sound_attack_2
+	sound.pitch_scale = randf_range(0.9, 1.1)
+	sound.play()
 	
 func on_power():
 	anim.play("power")
