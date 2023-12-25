@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d2n8rrdi71wei"]
+[gd_scene load_steps=20 format=3 uid="uid://d2n8rrdi71wei"]
 
 [ext_resource type="PackedScene" uid="uid://d057wcgaubavk" path="res://Scenes/monster_base.tscn" id="1_cxku3"]
 [ext_resource type="Script" path="res://Scripts/monster_05.gd" id="2_2sudk"]
@@ -78,16 +78,25 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="Curve" id="Curve_c22be"]
+_data = [Vector2(0.0229008, 1), 0.0, 0.0, 0, 0, Vector2(0.679389, 1), -0.101048, -0.101048, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f33kn"]
+curve = SubResource("Curve_c22be")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_83hqo"]
 particle_flag_disable_z = true
-angle_min = -29.8
-angle_max = 29.8
+angle_max = 360.0
 direction = Vector3(-1, -0.7, 0)
+spread = 16.448
 initial_velocity_min = 100.0
 initial_velocity_max = 148.28
 gravity = Vector3(0, 30, 0)
-scale_min = 0.75
-scale_max = 1.25
+scale_min = 0.25
+scale_max = 0.75
+color = Color(0, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_f33kn")
 
 [node name="Monster05" instance=ExtResource("1_cxku3")]
 script = ExtResource("2_2sudk")
@@ -124,11 +133,13 @@ stream = ExtResource("7_svryp")
 stream = ExtResource("8_k8xqh")
 
 [node name="AttackEffect" type="GPUParticles2D" parent="." index="4"]
-position = Vector2(-74, -93)
+position = Vector2(-74, -106)
 emitting = false
-amount = 12
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_83hqo")
 texture = ExtResource("9_4raud")
+lifetime = 2.0
 one_shot = true
+explosiveness = 0.54
 
 [connection signal="animation_finished" from="Sprite/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

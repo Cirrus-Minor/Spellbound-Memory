@@ -407,7 +407,6 @@ func _on_btn_continue_pressed():
 #region Level factory
 func generate_monsters():
 	monsters.clear()
-
 	
 	match GameState.level:
 		1:
@@ -428,7 +427,7 @@ func generate_monsters():
 
 		5:
 			add_monster(monster_05, monster_pos_1, 12)
-			add_monster(monster_02, monster_pos_2, 8)
+			add_monster(monster_01, monster_pos_2, 8)
 			
 		6:
 			add_monster(monster_04, monster_pos_1, 6)

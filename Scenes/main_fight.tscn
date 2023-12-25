@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
 [ext_resource type="Texture2D" uid="uid://g8uawuju0qn2" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
-[ext_resource type="Texture2D" uid="uid://d2aer5wtb1oem" path="res://Assets/Cards/combo_effect.png" id="3_hdsbb"]
 [ext_resource type="Texture2D" uid="uid://bdek2qenbuvmt" path="res://Assets/Cards/cardset.png" id="3_nlr24"]
 [ext_resource type="Texture2D" uid="uid://bbsuaibtxqffa" path="res://Assets/UI/ComboEffect.png" id="3_y7ggx"]
 [ext_resource type="PackedScene" uid="uid://eae21bejlvma" path="res://Scenes/player.tscn" id="4_yabtv"]
@@ -11,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://digo5e4v67p23" path="res://Scenes/unit_ui.tscn" id="6_ic78m"]
 [ext_resource type="Script" path="res://Scripts/level-new-card.gd" id="7_puo44"]
 [ext_resource type="Script" path="res://Scripts/start_run_screen.gd" id="9_pcga4"]
+[ext_resource type="Texture2D" uid="uid://c5x3c8tp3wbab" path="res://Assets/Cards/card_frame.png" id="10_8b66o"]
 [ext_resource type="AudioStream" uid="uid://u3tgirxpc0o3" path="res://Assets/Sound/combo_end.wav" id="10_lff2h"]
 [ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
 [ext_resource type="AudioStream" uid="uid://c3ss7vualrgaa" path="res://Assets/Sound/card_turn.wav" id="11_b8wel"]
@@ -258,12 +258,6 @@ text = "Start"
 [node name="Card1" type="Area2D" parent="Interface/StartRunScreen"]
 position = Vector2(14, 14)
 
-[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card1"]
-visible = false
-position = Vector2(125, 161.5)
-scale = Vector2(0.6625, 0.65625)
-texture = ExtResource("3_hdsbb")
-
 [node name="Sprite" type="Sprite2D" parent="Interface/StartRunScreen/Card1"]
 position = Vector2(125, 160)
 scale = Vector2(0.671875, 0.671875)
@@ -287,14 +281,15 @@ theme_override_font_sizes/font_size = 25
 text = "x 10"
 horizontal_alignment = 1
 
+[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card1"]
+visible = false
+modulate = Color(1, 0.807843, 0, 1)
+position = Vector2(125, 160)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_8b66o")
+
 [node name="Card2" type="Area2D" parent="Interface/StartRunScreen"]
 position = Vector2(166, 14)
-
-[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card2"]
-visible = false
-position = Vector2(125, 161.5)
-scale = Vector2(0.6625, 0.65625)
-texture = ExtResource("3_hdsbb")
 
 [node name="Sprite" type="Sprite2D" parent="Interface/StartRunScreen/Card2"]
 position = Vector2(125, 160)
@@ -319,14 +314,15 @@ theme_override_font_sizes/font_size = 25
 text = "x 10"
 horizontal_alignment = 1
 
+[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card2"]
+visible = false
+modulate = Color(1, 0.807843, 0, 1)
+position = Vector2(125, 160)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_8b66o")
+
 [node name="Card3" type="Area2D" parent="Interface/StartRunScreen"]
 position = Vector2(310, 14)
-
-[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card3"]
-visible = false
-position = Vector2(125, 161.5)
-scale = Vector2(0.6625, 0.65625)
-texture = ExtResource("3_hdsbb")
 
 [node name="Sprite" type="Sprite2D" parent="Interface/StartRunScreen/Card3"]
 position = Vector2(125, 160)
@@ -350,6 +346,13 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 25
 text = "x 1"
 horizontal_alignment = 1
+
+[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card3"]
+visible = false
+modulate = Color(1, 0.807843, 0, 1)
+position = Vector2(125, 160)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_8b66o")
 
 [node name="Player" parent="." instance=ExtResource("4_yabtv")]
 position = Vector2(682, 327)
