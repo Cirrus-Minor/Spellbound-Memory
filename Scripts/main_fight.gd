@@ -408,10 +408,6 @@ func _on_btn_continue_pressed():
 func generate_monsters():
 	monsters.clear()
 	
-	add_monster(monster_03, monster_pos_1, 2)
-	add_monster(monster_03, monster_pos_2, 6)
-	return
-	
 	match GameState.level:
 		1:
 			add_monster(monster_01, monster_pos_1, 10)
