@@ -1,0 +1,134 @@
+[gd_scene load_steps=18 format=3 uid="uid://d2n8rrdi71wei"]
+
+[ext_resource type="PackedScene" uid="uid://d057wcgaubavk" path="res://Scenes/monster_base.tscn" id="1_cxku3"]
+[ext_resource type="Script" path="res://Scripts/monster_05.gd" id="2_2sudk"]
+[ext_resource type="Texture2D" uid="uid://bocl5x8gr7xg6" path="res://Assets/Sprites/m05-sprites.png" id="3_8ihij"]
+[ext_resource type="AudioStream" uid="uid://cdcatxmvcc7br" path="res://Assets/Sound/m1_attack1.wav" id="4_cusp5"]
+[ext_resource type="AudioStream" uid="uid://581wrwblxhf7" path="res://Assets/Sound/m1_die.wav" id="5_mu2ae"]
+[ext_resource type="AudioStream" uid="uid://6ul15drcmeyh" path="res://Assets/Sound/m1_hurt1.wav" id="6_iqc6s"]
+[ext_resource type="AudioStream" uid="uid://dddlhin6k3aq3" path="res://Assets/Sound/m1_hurt2.wav" id="7_svryp"]
+[ext_resource type="AudioStream" uid="uid://d3bxb3iyat6do" path="res://Assets/Sound/m1_attack2.wav" id="8_k8xqh"]
+[ext_resource type="Texture2D" uid="uid://c36g1ofg6cs8t" path="res://Assets/Sprites/m05-part.png" id="9_4raud"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e67ab"]
+atlas = ExtResource("3_8ihij")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjobp"]
+atlas = ExtResource("3_8ihij")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_063tb"]
+atlas = ExtResource("3_8ihij")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj4qs"]
+atlas = ExtResource("3_8ihij")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lqdl"]
+atlas = ExtResource("3_8ihij")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo82s"]
+atlas = ExtResource("3_8ihij")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcrbn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e67ab")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjobp")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_063tb")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aj4qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lqdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo82s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lqdl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_83hqo"]
+particle_flag_disable_z = true
+angle_min = -29.8
+angle_max = 29.8
+direction = Vector3(-1, -0.7, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 148.28
+gravity = Vector3(0, 30, 0)
+scale_min = 0.75
+scale_max = 1.25
+
+[node name="Monster05" instance=ExtResource("1_cxku3")]
+script = ExtResource("2_2sudk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
+position = Vector2(-99, -203)
+sprite_frames = SubResource("SpriteFrames_kcrbn")
+animation = &"attack"
+autoplay = "idle"
+centered = false
+
+[node name="UI" parent="Sprite" index="1"]
+position = Vector2(24, -23)
+
+[node name="Item" parent="Sprite/UI" index="0"]
+frame = 4
+
+[node name="HitParticles" parent="Sprite" index="2"]
+position = Vector2(-25, -66)
+
+[node name="Attack1" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource("4_cusp5")
+
+[node name="Die" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource("5_mu2ae")
+
+[node name="Hurt1" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource("6_iqc6s")
+
+[node name="Hurt2" type="AudioStreamPlayer" parent="Sounds" index="3"]
+stream = ExtResource("7_svryp")
+
+[node name="Attack2" type="AudioStreamPlayer" parent="Sounds" index="4"]
+stream = ExtResource("8_k8xqh")
+
+[node name="AttackEffect" type="GPUParticles2D" parent="." index="4"]
+position = Vector2(-74, -93)
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_83hqo")
+texture = ExtResource("9_4raud")
+one_shot = true
+
+[connection signal="animation_finished" from="Sprite/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -51,6 +51,7 @@ var monster_01 = preload("res://Scenes/monster_01.tscn")
 var monster_02 = preload("res://Scenes/monster_02.tscn")
 var monster_03 = preload("res://Scenes/monster_03.tscn")
 var monster_04 = preload("res://Scenes/monster_04.tscn")
+var monster_05 = preload("res://Scenes/monster_05.tscn")
 
 var full_deck = []
 var rest_deck = []
@@ -339,6 +340,16 @@ func manipulate_cards(amount):
 		complete_deck.shuffle()
 		get_tree().call_group("cards", "swap_cards", complete_deck.pop_back(), complete_deck.pop_back())
 	
+func ink_cards(amount, delay):
+	var complete_deck = []
+	for node in get_tree().get_nodes_in_group("cards"):
+			complete_deck.push_back(node)
+	complete_deck.shuffle()
+	if amount > complete_deck.size(): amount = complete_deck.size()
+	for i in amount:
+		var card = complete_deck.pop_front()
+		card.make_inked(delay)
+
 func check_victory():
 	if state == Game_state.GameOver: return
 	var is_victory = true
@@ -396,6 +407,7 @@ func _on_btn_continue_pressed():
 #region Level factory
 func generate_monsters():
 	monsters.clear()
+
 	
 	match GameState.level:
 		1:
@@ -413,33 +425,43 @@ func generate_monsters():
 			add_monster(monster_01, monster_pos_1, 12)
 			add_monster(monster_01, monster_pos_2, 10)
 			add_monster(monster_01, monster_pos_3, 8)
-			
+
 		5:
+			add_monster(monster_05, monster_pos_1, 12)
+			add_monster(monster_02, monster_pos_2, 8)
+			
+		6:
 			add_monster(monster_04, monster_pos_1, 6)
 			add_monster(monster_01, monster_pos_2, 12)
 			add_monster(monster_01, monster_pos_3, 9)
 			
-		6:
+		7:
 			add_monster(monster_04, monster_pos_1, 6)
 			add_monster(monster_02, monster_pos_2, 10)
 			
-		7:
-			add_monster(monster_04, monster_pos_1, 6)
-			add_monster(monster_04, monster_pos_2, 9)
-			add_monster(monster_01, monster_pos_3, 12)
-			
 		8:
-			add_monster(monster_03, monster_pos_1, 12)
-			add_monster(monster_01, monster_pos_2, 8)
+			add_monster(monster_04, monster_pos_1, 6)
+			add_monster(monster_05, monster_pos_2, 9)
+			add_monster(monster_01, monster_pos_3, 12)
 			
 		9:
 			add_monster(monster_03, monster_pos_1, 12)
-			add_monster(monster_02, monster_pos_2, 8)
+			add_monster(monster_01, monster_pos_2, 8)
 			
 		10:
 			add_monster(monster_03, monster_pos_1, 12)
+			add_monster(monster_02, monster_pos_2, 8)
+			
+		11:
+			add_monster(monster_03, monster_pos_1, 12)
 			add_monster(monster_01, monster_pos_2, 10)
 			add_monster(monster_01, monster_pos_3, 8)
+			
+		12:
+			add_monster(monster_03, monster_pos_1, 12)
+			add_monster(monster_05, monster_pos_2, 10)
+			add_monster(monster_01, monster_pos_3, 8)
+			
 		_:
 			add_monster(monster_03, monster_pos_1, 12)
 			add_monster(monster_04, monster_pos_2, 10)
@@ -452,6 +474,7 @@ func add_monster(type, pos, delay):
 		new_monster.on_monster_attack.connect(_on_monster_attack)
 		new_monster.on_revive_monster.connect(revive_monster)
 		new_monster.on_manipulate.connect(manipulate_cards)
+		new_monster.on_ink.connect(ink_cards)
 		monsters.push_front(new_monster)
 		add_child(new_monster)
 #endregion

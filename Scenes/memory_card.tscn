@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfh2n2qb4nm82"]
+[gd_scene load_steps=5 format=3 uid="uid://bfh2n2qb4nm82"]
 
 [ext_resource type="Script" path="res://Scripts/memory-card.gd" id="1_sql2m"]
 [ext_resource type="Texture2D" uid="uid://bdek2qenbuvmt" path="res://Assets/Cards/cardset.png" id="2_0xvfh"]
+[ext_resource type="Texture2D" uid="uid://cmrom501tubw7" path="res://Assets/Cards/ink.png" id="3_u0rlb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vhxmg"]
 size = Vector2(128, 128)
@@ -17,5 +18,11 @@ shape = SubResource("RectangleShape2D_vhxmg")
 texture = ExtResource("2_0xvfh")
 hframes = 8
 vframes = 8
+
+[node name="Ink" type="Sprite2D" parent="Sprite2D"]
+visible = false
+position = Vector2(-0.5, 0.125007)
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("3_u0rlb")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
