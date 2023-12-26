@@ -88,7 +88,8 @@ func start_level():
 	process_cards(4)
 	
 func start_run():
-	state = Game_state.Starting
+	if GameState.level == 1:
+		state = Game_state.Starting
 	
 func _on_btn_start_pressed():
 	start_run_ui.hide()
