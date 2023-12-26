@@ -214,17 +214,16 @@ theme_override_font_sizes/font_size = 48
 toggle_mode = true
 text = "Continue"
 
-[node name="BtnExit" type="Button" parent="Interface/LevelEndNewCard/Label"]
+[node name="BtnSaveAndExit" type="Button" parent="Interface/LevelEndNewCard/Label"]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 518.0
-offset_right = 364.0
-offset_bottom = 593.0
+offset_left = 92.0
+offset_top = 513.0
+offset_right = 412.0
+offset_bottom = 588.0
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
-text = "Exit
-"
+text = "Save and quit"
 
 [node name="StartRunScreen" type="Node2D" parent="Interface"]
 visible = false
@@ -440,7 +439,7 @@ stream = ExtResource("28_m326u")
 [connection signal="pressed" from="Interface/GameOver/HiScores/BtnExit" to="." method="_on_btn_exit_pressed"]
 [connection signal="pressed" from="Interface/GameOver/EnterName/BtnSubmitName" to="Interface/GameOver" method="_on_btn_submit_name_pressed"]
 [connection signal="pressed" from="Interface/LevelEndNewCard/Label/BtnContinue" to="." method="_on_btn_continue_pressed"]
-[connection signal="pressed" from="Interface/LevelEndNewCard/Label/BtnExit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="Interface/LevelEndNewCard/Label/BtnSaveAndExit" to="." method="_on_btn_save_and_exit_pressed"]
 [connection signal="pressed" from="Interface/StartRunScreen/Label/BtnStart" to="." method="_on_btn_start_pressed"]
 [connection signal="input_event" from="Interface/StartRunScreen/Card1" to="Interface/StartRunScreen" method="_on_card_1_input_event"]
 [connection signal="input_event" from="Interface/StartRunScreen/Card2" to="Interface/StartRunScreen" method="_on_card_2_input_event"]

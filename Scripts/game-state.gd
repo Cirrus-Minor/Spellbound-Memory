@@ -3,6 +3,8 @@ extends Node
 const VERSION = "0.4.0"
 const AUTHOR = "Cirrus Minor"
 
+const SAVE_FILE = "user://savegame.tres"
+
 const CARDS_PER_ROW = 4
 const CARDS_NUMBER = 20
 
@@ -64,6 +66,9 @@ func add_score_name(player):
 	hi_scores.pop_back()
 	save_scores()
 	
+func start_game():
+	load_game()
+	
 func save_scores():
 	var file_content = []
 	for record in hi_scores:
@@ -97,3 +102,29 @@ func generate_score_data():
 	record = score_record.new("Evron", 50, 3)
 	hi_scores.push_back(record)
 	save_scores()
+
+func save_game():
+	var savegame = GameSave.new() #preload("res://Scripts/game-save.gd").new()
+	savegame.version = VERSION
+	savegame.level = level
+	savegame.money = money
+	savegame.money_total = money_total
+	savegame.player_health = player_health
+	savegame.player_health_max = player_health_max
+	savegame.player_shields_max = player_shields_max
+	ResourceSaver.save(savegame, SAVE_FILE)
+	
+func load_game():
+	reset()
+	if FileAccess.file_exists(SAVE_FILE):
+		var savegame = ResourceLoader.load(SAVE_FILE)
+		if savegame is GameSave: # Check that the data is valid
+			level = savegame.level + 1
+			money = savegame.money
+			money_total = savegame.money_total
+			player_health = savegame.player_health
+			player_health_max = savegame.player_health_max
+			player_shields_max = savegame.player_shields_max
+			
+		DirAccess.remove_absolute(SAVE_FILE)
+

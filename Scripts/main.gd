@@ -26,6 +26,8 @@ func _unhandled_input(event):
 func _on_start_game():
 	_start_screen.queue_free()
 	main_music.play()
+	GameState.start_game()
+	
 	generate_fight_zone(true)
 			
 func _on_level_up():

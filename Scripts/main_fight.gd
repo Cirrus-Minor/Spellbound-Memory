@@ -396,6 +396,10 @@ func _on_btn_play_again_pressed():
 func _on_btn_exit_pressed():
 	get_tree().quit()
 	
+func _on_btn_save_and_exit_pressed():
+	GameState.save_game()
+	get_tree().quit()
+	
 func _on_btn_continue_pressed():
 	GameState.player_health = player_health
 	GameState.player_health_max = player_health_max
