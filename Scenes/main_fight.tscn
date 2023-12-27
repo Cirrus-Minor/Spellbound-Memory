@@ -205,24 +205,22 @@ autowrap_mode = 2
 
 [node name="BtnContinue" type="Button" parent="Interface/LevelEndNewCard/Label"]
 layout_mode = 0
-offset_left = 123.0
-offset_top = 419.0
-offset_right = 366.0
-offset_bottom = 494.0
+offset_left = 15.0
+offset_top = 361.0
+offset_right = 475.0
+offset_bottom = 436.0
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 48
-toggle_mode = true
 text = "Continue"
 
 [node name="BtnSaveAndExit" type="Button" parent="Interface/LevelEndNewCard/Label"]
 layout_mode = 0
-offset_left = 92.0
-offset_top = 513.0
-offset_right = 412.0
-offset_bottom = 588.0
+offset_left = 15.0
+offset_top = 469.0
+offset_right = 475.0
+offset_bottom = 544.0
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 48
-toggle_mode = true
 text = "Save and quit"
 
 [node name="StartRunScreen" type="Node2D" parent="Interface"]
@@ -245,9 +243,9 @@ autowrap_mode = 2
 
 [node name="BtnStart" type="Button" parent="Interface/StartRunScreen/Label"]
 layout_mode = 0
-offset_left = 121.0
+offset_left = 78.0
 offset_top = 494.0
-offset_right = 364.0
+offset_right = 401.0
 offset_bottom = 569.0
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 48
