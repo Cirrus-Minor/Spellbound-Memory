@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://eae21bejlvma"]
+[gd_scene load_steps=29 format=3 uid="uid://eae21bejlvma"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_haifg"]
 [ext_resource type="Texture2D" uid="uid://dojpfn16xvpwa" path="res://Assets/Sprites/shield.png" id="3_h3jjv"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://btk64sv8s2pfa" path="res://Assets/Sound/player_power.wav" id="9_58keh"]
 [ext_resource type="Texture2D" uid="uid://djxjdidtmhx" path="res://Assets/Effects/attack_missile.png" id="9_ps5c3"]
 [ext_resource type="Texture2D" uid="uid://do25n8evf5yow" path="res://Assets/Effects/attack_bolt.png" id="10_3bp6c"]
+[ext_resource type="AudioStream" uid="uid://b5sk7qgbtsrhf" path="res://Assets/Sound/player_jump.wav" id="11_7e738"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbk3x"]
 size = Vector2(93.4211, 179.829)
@@ -194,7 +195,12 @@ volume_db = 2.0
 
 [node name="Shield" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("7_traed")
-volume_db = -5.333
+volume_db = -5.0
+pitch_scale = 1.51
+
+[node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_7e738")
+volume_db = -2.0
 pitch_scale = 1.51
 
 [node name="HitParticles" parent="." instance=ExtResource("4_2g18j")]

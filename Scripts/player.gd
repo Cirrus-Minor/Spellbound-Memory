@@ -14,6 +14,7 @@ extends Area2D
 @onready var sound_hurt_2 = $Sounds/Hurt2
 @onready var sound_die = $Sounds/Die
 @onready var sound_power = $Sounds/Power
+@onready var sound_jump = $Sounds/Jump
 
 var is_dead = false
 var is_victory = false
@@ -39,6 +40,8 @@ func _physics_process(delta):
 		if position.y > position_y:
 			position.y = position_y
 			velocity = -800
+			sound_jump.pitch_scale = randf_range(1.2, 1.3)
+			sound_jump.play()
 		
 func hurt():
 	sprite.play("hurt")
