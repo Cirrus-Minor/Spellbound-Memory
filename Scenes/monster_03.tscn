@@ -101,7 +101,7 @@ animations = [{
 script = ExtResource("2_0ocqu")
 health_max = 2
 damages = 1
-bounty = 15
+bounty = 25
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
 position = Vector2(-99, -203)
