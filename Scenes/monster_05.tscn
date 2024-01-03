@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://d057wcgaubavk" path="res://Scenes/monster_base.tscn" id="1_cxku3"]
 [ext_resource type="Script" path="res://Scripts/monster_05.gd" id="2_2sudk"]
 [ext_resource type="Texture2D" uid="uid://bocl5x8gr7xg6" path="res://Assets/Sprites/m05-sprites.png" id="3_8ihij"]
-[ext_resource type="AudioStream" uid="uid://cdcatxmvcc7br" path="res://Assets/Sound/m1_attack1.wav" id="4_cusp5"]
-[ext_resource type="AudioStream" uid="uid://581wrwblxhf7" path="res://Assets/Sound/m1_die.wav" id="5_mu2ae"]
-[ext_resource type="AudioStream" uid="uid://6ul15drcmeyh" path="res://Assets/Sound/m1_hurt1.wav" id="6_iqc6s"]
-[ext_resource type="AudioStream" uid="uid://dddlhin6k3aq3" path="res://Assets/Sound/m1_hurt2.wav" id="7_svryp"]
-[ext_resource type="AudioStream" uid="uid://d3bxb3iyat6do" path="res://Assets/Sound/m1_attack2.wav" id="8_k8xqh"]
+[ext_resource type="AudioStream" uid="uid://bs1y480uambpa" path="res://Assets/Sound/m5_attack1.wav" id="4_xfx4n"]
+[ext_resource type="AudioStream" uid="uid://ci7woonu1tuv5" path="res://Assets/Sound/m5_attack2.wav" id="5_mifry"]
+[ext_resource type="AudioStream" uid="uid://c15ypxda2njxs" path="res://Assets/Sound/m5_hurt1.wav" id="6_6aemd"]
+[ext_resource type="AudioStream" uid="uid://bvb7pelgyks1j" path="res://Assets/Sound/m5_hurt2.wav" id="7_pygcq"]
+[ext_resource type="AudioStream" uid="uid://bempbnhst5pxn" path="res://Assets/Sound/m5_die.wav" id="8_nno53"]
 [ext_resource type="Texture2D" uid="uid://c36g1ofg6cs8t" path="res://Assets/Sprites/m05-part.png" id="9_4raud"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e67ab"]
@@ -100,6 +100,8 @@ alpha_curve = SubResource("CurveTexture_f33kn")
 
 [node name="Monster05" instance=ExtResource("1_cxku3")]
 script = ExtResource("2_2sudk")
+damages = 1
+bounty = 20
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
 position = Vector2(-99, -203)
@@ -118,19 +120,22 @@ frame = 4
 position = Vector2(-25, -66)
 
 [node name="Attack1" type="AudioStreamPlayer" parent="Sounds" index="0"]
-stream = ExtResource("4_cusp5")
+stream = ExtResource("4_xfx4n")
 
-[node name="Die" type="AudioStreamPlayer" parent="Sounds" index="1"]
-stream = ExtResource("5_mu2ae")
+[node name="Attack2" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource("5_mifry")
 
 [node name="Hurt1" type="AudioStreamPlayer" parent="Sounds" index="2"]
-stream = ExtResource("6_iqc6s")
+stream = ExtResource("6_6aemd")
+volume_db = 5.0
 
 [node name="Hurt2" type="AudioStreamPlayer" parent="Sounds" index="3"]
-stream = ExtResource("7_svryp")
+stream = ExtResource("7_pygcq")
+volume_db = 5.0
 
-[node name="Attack2" type="AudioStreamPlayer" parent="Sounds" index="4"]
-stream = ExtResource("8_k8xqh")
+[node name="Die" type="AudioStreamPlayer" parent="Sounds" index="4"]
+stream = ExtResource("8_nno53")
+volume_db = 8.0
 
 [node name="AttackEffect" type="GPUParticles2D" parent="." index="4"]
 position = Vector2(-74, -106)
