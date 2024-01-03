@@ -1,13 +1,17 @@
-[gd_scene load_steps=24 format=3 uid="uid://eae21bejlvma"]
+[gd_scene load_steps=28 format=3 uid="uid://eae21bejlvma"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_haifg"]
 [ext_resource type="Texture2D" uid="uid://dojpfn16xvpwa" path="res://Assets/Sprites/shield.png" id="3_h3jjv"]
 [ext_resource type="Texture2D" uid="uid://t38hyis5s0qd" path="res://Assets/Sprites/player-sprites.png" id="3_plpp7"]
 [ext_resource type="PackedScene" uid="uid://bkxioccsl4bbm" path="res://Scenes/hit_particles.tscn" id="4_2g18j"]
-[ext_resource type="AudioStream" uid="uid://bsr2ss3uk8046" path="res://Assets/Sound/player_attack.wav" id="5_1w4ka"]
-[ext_resource type="AudioStream" uid="uid://b7ppwn7genkqa" path="res://Assets/Sound/player_hurt.wav" id="6_wa5na"]
+[ext_resource type="AudioStream" uid="uid://b2d1rykal5kmi" path="res://Assets/Sound/player_attack1.wav" id="4_kq7qv"]
+[ext_resource type="AudioStream" uid="uid://bldsf4iy3t0bj" path="res://Assets/Sound/player_attack2.wav" id="5_y3055"]
+[ext_resource type="AudioStream" uid="uid://kl3ypw7834qv" path="res://Assets/Sound/player_hurt1.wav" id="6_ilehq"]
 [ext_resource type="AudioStream" uid="uid://54xt1vc5epu2" path="res://Assets/Sound/shield.wav" id="7_traed"]
+[ext_resource type="AudioStream" uid="uid://2hxj8bedc5eo" path="res://Assets/Sound/player_hurt2.wav" id="7_wd007"]
+[ext_resource type="AudioStream" uid="uid://c2bdovsx5w4hl" path="res://Assets/Sound/player_die.wav" id="8_th85x"]
 [ext_resource type="Texture2D" uid="uid://cghntij100k8h" path="res://Assets/Effects/attack_fire.png" id="8_ueukw"]
+[ext_resource type="AudioStream" uid="uid://btk64sv8s2pfa" path="res://Assets/Sound/player_power.wav" id="9_58keh"]
 [ext_resource type="Texture2D" uid="uid://djxjdidtmhx" path="res://Assets/Effects/attack_missile.png" id="9_ps5c3"]
 [ext_resource type="Texture2D" uid="uid://do25n8evf5yow" path="res://Assets/Effects/attack_bolt.png" id="10_3bp6c"]
 
@@ -164,11 +168,29 @@ texture = ExtResource("3_h3jjv")
 
 [node name="Sounds" type="Node" parent="."]
 
-[node name="Attack" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("5_1w4ka")
+[node name="Attack1" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_kq7qv")
+volume_db = 4.0
 
-[node name="Hurt" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("6_wa5na")
+[node name="Attack2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_y3055")
+volume_db = 5.0
+
+[node name="Hurt1" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_ilehq")
+volume_db = 5.0
+
+[node name="Hurt2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_wd007")
+volume_db = 5.0
+
+[node name="Die" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_th85x")
+volume_db = 5.0
+
+[node name="Power" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_58keh")
+volume_db = 2.0
 
 [node name="Shield" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("7_traed")

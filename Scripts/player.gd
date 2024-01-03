@@ -7,9 +7,13 @@ extends Area2D
 @onready var missile_paticles = $MissileAttack
 @onready var bolt_paticles = $BoltAttack
 
-@onready var sound_attack = $Sounds/Attack
-@onready var sound_hurt = $Sounds/Hurt
 @onready var sound_shield = $Sounds/Shield
+@onready var sound_attack_1 = $Sounds/Attack1
+@onready var sound_attack_2 = $Sounds/Attack2
+@onready var sound_hurt_1 = $Sounds/Hurt1
+@onready var sound_hurt_2 = $Sounds/Hurt2
+@onready var sound_die = $Sounds/Die
+@onready var sound_power = $Sounds/Power
 
 var is_dead = false
 var is_victory = false
@@ -41,8 +45,11 @@ func hurt():
 	hit_paticles.process_material.direction = Vector3(1, -0.5, 0)
 	hit_paticles.emitting = true
 	await get_tree().create_timer(0.2).timeout
-	sound_hurt.pitch_scale = randf_range(0.95, 1.2)
-	sound_hurt.play()
+	var sound = sound_hurt_1
+	if randi_range(1, 2) == 2: sound = sound_hurt_2
+	await get_tree().create_timer(0.2).timeout
+	sound.pitch_scale = randf_range(1.1, 1.25)
+	sound.play()
 	
 func shield():
 	var tween = get_tree().create_tween()
@@ -63,8 +70,10 @@ func attack(attack_type):
 		
 	particles.process_material.direction = Vector3(1, 0, 0)
 	particles.emitting = true
-	sound_attack.pitch_scale = randf_range(0.9, 1.5)
-	sound_attack.play()
+	var sound = sound_attack_1
+	if randi_range(1, 2) == 2: sound = sound_attack_2
+	sound.pitch_scale = randf_range(0.9, 1.1)
+	sound.play()
 	
 func victory():
 	await get_tree().create_timer(0.5).timeout
@@ -74,10 +83,13 @@ func victory():
 	
 func cast_magic():
 	sprite.play("magic")
+	sound_power.pitch_scale = randf_range(0.9, 1.2)
+	sound_power.play()
 	
 func die():
 	is_dead = true
 	sprite.play("die")
+	sound_die.play()
 
 func _on_animated_sprite_2d_animation_finished():
 	sprite.play("idle")
