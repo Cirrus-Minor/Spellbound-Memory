@@ -1,6 +1,6 @@
 extends Node
 
-const VERSION = "0.5.0"
+const VERSION = "1.0.0"
 const AUTHOR = "Cirrus Minor"
 
 const SAVE_FILE = "user://savegame.tres"
