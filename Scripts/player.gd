@@ -40,7 +40,7 @@ func _physics_process(delta):
 		if position.y > position_y:
 			position.y = position_y
 			velocity = -800
-			sound_jump.pitch_scale = randf_range(1.2, 1.3)
+			sound_jump.pitch_scale = randf_range(1.05, 1.15)
 			sound_jump.play()
 		
 func hurt():
