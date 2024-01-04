@@ -201,7 +201,6 @@ pitch_scale = 1.51
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("11_7e738")
 volume_db = -2.0
-pitch_scale = 1.51
 
 [node name="HitParticles" parent="." instance=ExtResource("4_2g18j")]
 position = Vector2(32.8947, -118.421)
