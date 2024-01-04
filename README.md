@@ -4,6 +4,8 @@
 ## Description
 Spellbound Memory is a cute and funny puzzle game that blends the mechanics of a memory game with the  elements of a roguelike deck builder like Slay the Spire.
 
+Spellbound Memory is made with Godot 4.2.1.
+
 ## Licenses
 
 ### Source Code (MIT License)
