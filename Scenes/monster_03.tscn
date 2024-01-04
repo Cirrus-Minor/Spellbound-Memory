@@ -1,8 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://cecbxdm8klbeg"]
+[gd_scene load_steps=19 format=3 uid="uid://cecbxdm8klbeg"]
 
 [ext_resource type="PackedScene" uid="uid://d057wcgaubavk" path="res://Scenes/monster_base.tscn" id="1_utf0c"]
 [ext_resource type="Script" path="res://Scripts/monster_03.gd" id="2_0ocqu"]
 [ext_resource type="Texture2D" uid="uid://deqjiex04my51" path="res://Assets/Sprites/m03-sprites.png" id="3_6cx18"]
+[ext_resource type="AudioStream" uid="uid://dv3euuwdprtaq" path="res://Assets/Sound/m3_attack1.wav" id="4_tscma"]
+[ext_resource type="AudioStream" uid="uid://dcc6mmp4qfowt" path="res://Assets/Sound/m3_attack2.wav" id="5_173ci"]
+[ext_resource type="AudioStream" uid="uid://6k6ur88n44fp" path="res://Assets/Sound/m3_hurt1.wav" id="6_abdek"]
+[ext_resource type="AudioStream" uid="uid://drvei4ylptv6s" path="res://Assets/Sound/m3_hurt2.wav" id="7_frlsa"]
+[ext_resource type="AudioStream" uid="uid://drrw01dsxr4b5" path="res://Assets/Sound/m3_die.wav" id="8_au25i"]
+[ext_resource type="AudioStream" uid="uid://dbdurijh8xr8j" path="res://Assets/Sound/m3_revive.wav" id="9_7o4ho"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4t07e"]
 atlas = ExtResource("3_6cx18")
@@ -93,9 +99,9 @@ animations = [{
 
 [node name="MonsterTree" instance=ExtResource("1_utf0c")]
 script = ExtResource("2_0ocqu")
-health_max = 6
+health_max = 2
 damages = 1
-bounty = 15
+bounty = 25
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite" index="0"]
 position = Vector2(-99, -203)
@@ -111,5 +117,27 @@ position = Vector2(19, 8)
 
 [node name="HitParticles" parent="Sprite" index="2"]
 position = Vector2(-4, -66)
+
+[node name="Attack1" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource("4_tscma")
+volume_db = 4.0
+
+[node name="Attack2" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource("5_173ci")
+volume_db = 12.0
+
+[node name="Hurt1" type="AudioStreamPlayer" parent="Sounds" index="3"]
+stream = ExtResource("6_abdek")
+volume_db = 8.0
+
+[node name="Hurt2" type="AudioStreamPlayer" parent="Sounds" index="4"]
+stream = ExtResource("7_frlsa")
+
+[node name="Die" type="AudioStreamPlayer" parent="Sounds" index="5"]
+stream = ExtResource("8_au25i")
+volume_db = 10.0
+
+[node name="Revive" type="AudioStreamPlayer" parent="Sounds" index="6"]
+stream = ExtResource("9_7o4ho")
 
 [connection signal="animation_finished" from="Sprite/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://5mepquwbookt"]
+[gd_scene load_steps=7 format=3 uid="uid://5mepquwbookt"]
 
 [ext_resource type="Texture2D" uid="uid://bdek2qenbuvmt" path="res://Assets/Cards/cardset.png" id="1_dogys"]
 [ext_resource type="Script" path="res://Scripts/card_info.gd" id="1_j3nxa"]
 [ext_resource type="Texture2D" uid="uid://3kvmhhyggv4b" path="res://Assets/Cards/cardinfo.png" id="2_m1p01"]
+[ext_resource type="FontFile" uid="uid://hmsr1uee8lho" path="res://Assets/Fonts/Lato-Bold.ttf" id="4_pmn0k"]
+[ext_resource type="FontFile" uid="uid://cf6bs4vo0ph6d" path="res://Assets/Fonts/Lato-Black.ttf" id="5_viyms"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s702n"]
 
@@ -30,6 +32,7 @@ offset_bottom = 99.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_pmn0k")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxEmpty_s702n")
 text = "Fireball"
@@ -40,5 +43,9 @@ offset_top = 116.0
 offset_right = 485.0
 offset_bottom = 188.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_pmn0k")
+theme_override_fonts/bold_font = ExtResource("5_viyms")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 18
 bbcode_enabled = true
 text = "The [b]Fireball[/b] is an attack spell that inflicts [b]5 damages[/b] to the first monster."

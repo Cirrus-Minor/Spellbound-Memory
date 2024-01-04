@@ -15,6 +15,7 @@ class_name MonsterBase
 @onready var sprite_item = $Sprite/UI/Item
 @onready var time_text = $Sprite/UI/Time
 @onready var hit_particles = $Sprite/HitParticles
+@onready var sound_coins = $Sounds/SoundCoins
 
 var health = health_max
 var shields = shields_max
@@ -26,6 +27,8 @@ var dead_monsters = 0 # how many dead monsters in the field? (for revive power)
 
 signal on_monster_attack(damages)
 signal on_revive_monster(amount)
+signal on_manipulate(amount)
+signal on_ink(amount, delay)
 
 func _ready():
 	shields = shields_max
@@ -48,7 +51,7 @@ func _process(delta):
 			process_action()
 			
 		time_text.text = str(ceil(timer_attack)).pad_decimals(0)
-		if timer_attack < 2.5:
+		if timer_attack <= 2:
 			var color_add = 1.5 + 0.5 * cos(Time.get_ticks_msec() / 100.0)
 			sprite_item.modulate.r = color_add 
 			sprite_item.modulate.g = color_add
@@ -79,6 +82,10 @@ func _physics_process(delta):
 			sprite.position = Vector2(0, 0)
 			is_starting = false
 			sprite_ui.show()
+	elif (sprite.position.x> 0):
+		sprite.position.x -= delta * 150
+		if (sprite.position.x < 0):
+			sprite.position.x = 0
 			
 	if is_dead && sprite.position.y < 0:
 		sprite.position.y += delta * velocity_y
@@ -100,8 +107,11 @@ func hurt(damages):
 		velocity_y = -400
 		sprite.position.y = - 2
 		sprite_ui.hide()
-		GameState.add_money(bounty)
-		bounty = 0
+		if bounty > 0:
+			sound_coins.pitch_scale = randf_range(0.9, 1.1)
+			sound_coins.play()
+			GameState.add_money(bounty)
+			bounty = 0		
 		on_dying()
 	else:
 		on_hurting()
@@ -130,6 +140,7 @@ func on_dying():
 	hit_particles.emitting = true
 
 func on_hurting():
+	sprite.position.x += 25
 	hit_particles.process_material.direction = Vector3(-1, -0.5, 0)
 	hit_particles.emitting = true
 	

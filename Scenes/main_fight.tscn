@@ -1,20 +1,36 @@
-[gd_scene load_steps=16 format=3 uid="uid://yuy7smhovixa"]
+[gd_scene load_steps=30 format=3 uid="uid://yuy7smhovixa"]
 
 [ext_resource type="Script" path="res://Scripts/main_fight.gd" id="1_6jo5b"]
-[ext_resource type="Texture2D" uid="uid://ds0fu6j0sk2aq" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
-[ext_resource type="Texture2D" uid="uid://d2aer5wtb1oem" path="res://Assets/Cards/combo_effect.png" id="3_hdsbb"]
+[ext_resource type="Texture2D" uid="uid://g8uawuju0qn2" path="res://Assets/Backgrounds/background.png" id="2_flsof"]
 [ext_resource type="Texture2D" uid="uid://bdek2qenbuvmt" path="res://Assets/Cards/cardset.png" id="3_nlr24"]
+[ext_resource type="Texture2D" uid="uid://bbsuaibtxqffa" path="res://Assets/UI/ComboEffect.png" id="3_y7ggx"]
 [ext_resource type="PackedScene" uid="uid://eae21bejlvma" path="res://Scenes/player.tscn" id="4_yabtv"]
 [ext_resource type="Script" path="res://Scripts/game-over.gd" id="5_s6mcq"]
+[ext_resource type="FontFile" uid="uid://hmsr1uee8lho" path="res://Assets/Fonts/Lato-Bold.ttf" id="6_dr67a"]
 [ext_resource type="PackedScene" uid="uid://digo5e4v67p23" path="res://Scenes/unit_ui.tscn" id="6_ic78m"]
-[ext_resource type="Script" path="res://Scripts/LevelEndNewCard.gd" id="6_pflc5"]
-[ext_resource type="Texture2D" uid="uid://bmfh3n7uncfpd" path="res://Assets/UI/SingleUI.png" id="7_w8cjg"]
-[ext_resource type="AudioStream" uid="uid://dd34qbfve5hid" path="res://Assets/Sound/combo.wav" id="9_p8fuy"]
+[ext_resource type="Script" path="res://Scripts/level-new-card.gd" id="7_puo44"]
+[ext_resource type="Script" path="res://Scripts/start_run_screen.gd" id="9_pcga4"]
+[ext_resource type="Texture2D" uid="uid://c5x3c8tp3wbab" path="res://Assets/Cards/card_frame.png" id="10_8b66o"]
 [ext_resource type="AudioStream" uid="uid://u3tgirxpc0o3" path="res://Assets/Sound/combo_end.wav" id="10_lff2h"]
 [ext_resource type="AudioStream" uid="uid://73tqur88hltx" path="res://Assets/Sound/cards_deal.wav" id="10_vsaxh"]
 [ext_resource type="AudioStream" uid="uid://c3ss7vualrgaa" path="res://Assets/Sound/card_turn.wav" id="11_b8wel"]
 [ext_resource type="AudioStream" uid="uid://8wrf4kinngyy" path="res://Assets/Sound/revive.wav" id="13_tgsfq"]
+[ext_resource type="AudioStream" uid="uid://dg6nvtll1udlo" path="res://Assets/Sound/coins_02.wav" id="13_yttod"]
 [ext_resource type="PackedScene" uid="uid://5mepquwbookt" path="res://Scenes/card_info.tscn" id="14_hkp2r"]
+[ext_resource type="AudioStream" uid="uid://soe77tbpedc1" path="res://Assets/Sound/coins_03.wav" id="14_i6xgg"]
+[ext_resource type="AudioStream" uid="uid://c1xso3n02ctax" path="res://Assets/Sound/Combo/combo01.wav" id="19_uxvm2"]
+[ext_resource type="AudioStream" uid="uid://cuqmgcoghtweq" path="res://Assets/Sound/Combo/combo02.wav" id="20_i6eei"]
+[ext_resource type="AudioStream" uid="uid://bopqhxg1ji4au" path="res://Assets/Sound/Combo/combo03.wav" id="21_lwuc2"]
+[ext_resource type="AudioStream" uid="uid://cr6aslcaibkhx" path="res://Assets/Sound/Combo/combo04.wav" id="22_mvwl5"]
+[ext_resource type="AudioStream" uid="uid://d2380dirwrbkh" path="res://Assets/Sound/Combo/combo05.wav" id="23_vtriv"]
+[ext_resource type="AudioStream" uid="uid://bdycpmwr34wsj" path="res://Assets/Sound/Combo/combo06.wav" id="24_csaa2"]
+[ext_resource type="AudioStream" uid="uid://7cef70hvyg2k" path="res://Assets/Sound/Combo/combo07.wav" id="25_7a47i"]
+[ext_resource type="AudioStream" uid="uid://d3s57bo46f2d3" path="res://Assets/Sound/Combo/combo08.wav" id="26_uqon1"]
+[ext_resource type="AudioStream" uid="uid://bwhp5u1gq4g7w" path="res://Assets/Sound/Combo/combo09.wav" id="27_bvi1u"]
+[ext_resource type="AudioStream" uid="uid://bja37ct6n6wg" path="res://Assets/Sound/Combo/combo10.wav" id="28_m326u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_widny"]
+size = Vector2(92, 90.5)
 
 [node name="MainFight" type="Node2D"]
 script = ExtResource("1_6jo5b")
@@ -27,8 +43,8 @@ centered = false
 position = Vector2(700, 580)
 
 [node name="ComboEffect" type="Sprite2D" parent="CardStack"]
-visible = false
-texture = ExtResource("3_hdsbb")
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_y7ggx")
 
 [node name="CardSprite" type="Sprite2D" parent="CardStack"]
 texture = ExtResource("3_nlr24")
@@ -40,92 +56,300 @@ offset_left = -93.0
 offset_top = 74.0
 offset_right = 97.0
 offset_bottom = 111.0
+theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 24
 text = "Combo x4"
 horizontal_alignment = 1
 
-[node name="GameOver" type="Node2D" parent="."]
+[node name="Interface" type="Node" parent="."]
+
+[node name="GameOver" type="Node2D" parent="Interface"]
 visible = false
 script = ExtResource("5_s6mcq")
 
-[node name="TextGameOver" type="Label" parent="GameOver"]
-offset_left = 109.0
-offset_top = 93.0
-offset_right = 500.0
-offset_bottom = 195.0
-theme_override_font_sizes/font_size = 72
+[node name="TextGameOver" type="Label" parent="Interface/GameOver"]
+offset_left = 116.0
+offset_top = 30.0
+offset_right = 507.0
+offset_bottom = 116.0
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 60
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="TextFinalScore" type="Label" parent="GameOver"]
-offset_left = 105.0
-offset_top = 264.0
-offset_right = 496.0
-offset_bottom = 404.0
-theme_override_font_sizes/font_size = 48
-text = "Your score:
-1200"
-horizontal_alignment = 1
+[node name="HiScores" type="Node2D" parent="Interface/GameOver"]
+visible = false
 
-[node name="BtnPlayAgain" type="Button" parent="GameOver"]
-offset_left = 193.0
-offset_top = 494.0
-offset_right = 436.0
-offset_bottom = 569.0
+[node name="BtnPlayAgain" type="Button" parent="Interface/GameOver/HiScores"]
+offset_left = 55.0
+offset_top = 589.0
+offset_right = 298.0
+offset_bottom = 664.0
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
 text = "Play again"
 
-[node name="BtnExit" type="Button" parent="GameOver"]
-offset_left = 191.0
-offset_top = 593.0
-offset_right = 434.0
-offset_bottom = 668.0
+[node name="BtnExit" type="Button" parent="Interface/GameOver/HiScores"]
+offset_left = 308.0
+offset_top = 589.0
+offset_right = 551.0
+offset_bottom = 664.0
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
 text = "Exit
 "
 
-[node name="LevelEndNewCard" type="Node2D" parent="."]
+[node name="ListIndexes" type="RichTextLabel" parent="Interface/GameOver/HiScores"]
+offset_left = 68.0
+offset_top = 210.0
+offset_right = 119.0
+offset_bottom = 494.0
+theme_override_constants/line_separation = 8
+theme_override_fonts/normal_font = ExtResource("6_dr67a")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "1
+2
+3
+4
+5"
+
+[node name="ListNames" type="RichTextLabel" parent="Interface/GameOver/HiScores"]
+offset_left = 139.0
+offset_top = 210.0
+offset_right = 423.0
+offset_bottom = 488.0
+theme_override_constants/line_separation = 8
+theme_override_fonts/normal_font = ExtResource("6_dr67a")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "Baba
+[shake rate=20.0 level=5 connected=1][rainbow freq=0.6 sat=0.6 val=0.8]Bibi[/rainbow][/shake]
+Bobo
+Bubu
+Byby
+"
+
+[node name="ListScores" type="RichTextLabel" parent="Interface/GameOver/HiScores"]
+offset_left = 414.0
+offset_top = 210.0
+offset_right = 548.0
+offset_bottom = 488.0
+theme_override_constants/line_separation = 8
+theme_override_fonts/normal_font = ExtResource("6_dr67a")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[right]25500[/right]
+[right]2398[/right]
+[right]124[/right]
+[right]28[/right]
+[right]20[/right]
+"
+
+[node name="EnterName" type="Node2D" parent="Interface/GameOver"]
 visible = false
-script = ExtResource("6_pflc5")
+position = Vector2(14, -118)
 
-[node name="CardInfo" parent="LevelEndNewCard" instance=ExtResource("14_hkp2r")]
-position = Vector2(46, 99)
+[node name="BtnSubmitName" type="Button" parent="Interface/GameOver/EnterName"]
+offset_left = 414.0
+offset_top = 354.0
+offset_right = 514.0
+offset_bottom = 413.0
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 36
+toggle_mode = true
+text = "OK"
 
-[node name="Label" type="Label" parent="LevelEndNewCard"]
+[node name="EnterNameLabel" type="Label" parent="Interface/GameOver/EnterName"]
+offset_left = 55.0
+offset_top = 237.0
+offset_right = 528.0
+offset_bottom = 336.0
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 39
+text = "You are in the Hall of
+Fame! Enter your name:"
+horizontal_alignment = 1
+
+[node name="NameEdit" type="LineEdit" parent="Interface/GameOver/EnterName"]
+offset_left = 54.0
+offset_top = 355.0
+offset_right = 397.0
+offset_bottom = 412.0
+theme_override_font_sizes/font_size = 35
+text = "Player"
+max_length = 14
+
+[node name="LevelEndNewCard" type="Node2D" parent="Interface"]
+visible = false
+script = ExtResource("7_puo44")
+
+[node name="CardInfo" parent="Interface/LevelEndNewCard" instance=ExtResource("14_hkp2r")]
+position = Vector2(46, 124)
+
+[node name="Label" type="Label" parent="Interface/LevelEndNewCard"]
 offset_left = 58.0
 offset_top = 53.0
-offset_right = 235.0
-offset_bottom = 79.0
-theme_override_font_sizes/font_size = 18
-text = "Congratulations, you've found this card:
+offset_right = 548.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 21
+text = "Congratulations for your victory! You've uncovered the following item:
 "
+autowrap_mode = 2
 
-[node name="BtnContinue" type="Button" parent="LevelEndNewCard/Label"]
+[node name="BtnContinue" type="Button" parent="Interface/LevelEndNewCard/Label"]
 layout_mode = 0
-offset_left = 123.0
-offset_top = 419.0
-offset_right = 366.0
-offset_bottom = 494.0
+offset_left = 15.0
+offset_top = 361.0
+offset_right = 475.0
+offset_bottom = 436.0
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 48
-toggle_mode = true
 text = "Continue"
 
-[node name="BtnExit" type="Button" parent="LevelEndNewCard/Label"]
+[node name="BtnSaveAndExit" type="Button" parent="Interface/LevelEndNewCard/Label"]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 518.0
-offset_right = 364.0
-offset_bottom = 593.0
+offset_left = 15.0
+offset_top = 469.0
+offset_right = 475.0
+offset_bottom = 544.0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 48
+text = "Save and quit"
+
+[node name="StartRunScreen" type="Node2D" parent="Interface"]
+visible = false
+script = ExtResource("9_pcga4")
+
+[node name="CardInfo" parent="Interface/StartRunScreen" instance=ExtResource("14_hkp2r")]
+position = Vector2(46, 289)
+
+[node name="Label" type="Label" parent="Interface/StartRunScreen"]
+offset_left = 58.0
+offset_top = 53.0
+offset_right = 548.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("6_dr67a")
+theme_override_font_sizes/font_size = 21
+text = "Here are your starting spell cards:
+"
+autowrap_mode = 2
+
+[node name="BtnStart" type="Button" parent="Interface/StartRunScreen/Label"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 494.0
+offset_right = 401.0
+offset_bottom = 569.0
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
-text = "Exit
-"
+text = "Start"
+
+[node name="Card1" type="Area2D" parent="Interface/StartRunScreen"]
+position = Vector2(14, 14)
+
+[node name="Sprite" type="Sprite2D" parent="Interface/StartRunScreen/Card1"]
+position = Vector2(125, 160)
+scale = Vector2(0.671875, 0.671875)
+texture = ExtResource("3_nlr24")
+hframes = 8
+vframes = 8
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interface/StartRunScreen/Card1"]
+position = Vector2(126, 160.25)
+shape = SubResource("RectangleShape2D_widny")
+
+[node name="TextMult" type="Label" parent="Interface/StartRunScreen/Card1"]
+offset_left = 102.0
+offset_top = 209.0
+offset_right = 151.0
+offset_bottom = 244.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "x 10"
+horizontal_alignment = 1
+
+[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card1"]
+visible = false
+modulate = Color(1, 0.807843, 0, 1)
+position = Vector2(125, 160)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_8b66o")
+
+[node name="Card2" type="Area2D" parent="Interface/StartRunScreen"]
+position = Vector2(166, 14)
+
+[node name="Sprite" type="Sprite2D" parent="Interface/StartRunScreen/Card2"]
+position = Vector2(125, 160)
+scale = Vector2(0.671875, 0.671875)
+texture = ExtResource("3_nlr24")
+hframes = 8
+vframes = 8
+frame = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interface/StartRunScreen/Card2"]
+position = Vector2(126, 160.25)
+shape = SubResource("RectangleShape2D_widny")
+
+[node name="TextMult" type="Label" parent="Interface/StartRunScreen/Card2"]
+offset_left = 102.0
+offset_top = 209.0
+offset_right = 151.0
+offset_bottom = 244.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "x 10"
+horizontal_alignment = 1
+
+[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card2"]
+visible = false
+modulate = Color(1, 0.807843, 0, 1)
+position = Vector2(125, 160)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_8b66o")
+
+[node name="Card3" type="Area2D" parent="Interface/StartRunScreen"]
+position = Vector2(310, 14)
+
+[node name="Sprite" type="Sprite2D" parent="Interface/StartRunScreen/Card3"]
+position = Vector2(125, 160)
+scale = Vector2(0.671875, 0.671875)
+texture = ExtResource("3_nlr24")
+hframes = 8
+vframes = 8
+frame = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interface/StartRunScreen/Card3"]
+position = Vector2(126, 160.25)
+shape = SubResource("RectangleShape2D_widny")
+
+[node name="TextMult" type="Label" parent="Interface/StartRunScreen/Card3"]
+offset_left = 102.0
+offset_top = 209.0
+offset_right = 151.0
+offset_bottom = 244.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "x 1"
+horizontal_alignment = 1
+
+[node name="Effect" type="Sprite2D" parent="Interface/StartRunScreen/Card3"]
+visible = false
+modulate = Color(1, 0.807843, 0, 1)
+position = Vector2(125, 160)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_8b66o")
 
 [node name="Player" parent="." instance=ExtResource("4_yabtv")]
 position = Vector2(682, 327)
@@ -135,19 +359,12 @@ position = Vector2(-5, -4)
 
 [node name="HUD" type="Node2D" parent="."]
 
-[node name="MoneyUI" type="Sprite2D" parent="HUD"]
-position = Vector2(1169, 656)
-texture = ExtResource("7_w8cjg")
-
-[node name="LevelUI" type="Sprite2D" parent="HUD"]
-position = Vector2(1169, 557)
-texture = ExtResource("7_w8cjg")
-
 [node name="Level" type="Label" parent="HUD"]
 offset_left = 1105.0
-offset_top = 532.0
+offset_top = 541.0
 offset_right = 1219.0
-offset_bottom = 580.0
+offset_bottom = 589.0
+theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 32
 text = "LVL 12"
 
@@ -156,19 +373,21 @@ offset_left = 1105.0
 offset_top = 631.0
 offset_right = 1242.0
 offset_bottom = 679.0
+theme_override_fonts/font = ExtResource("6_dr67a")
 theme_override_font_sizes/font_size = 32
 text = "$ 1250"
 
 [node name="Sounds" type="Node" parent="."]
 
-[node name="Combo" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("9_p8fuy")
-volume_db = -8.0
-pitch_scale = 0.8
-
 [node name="ComboEnd" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("10_lff2h")
-volume_db = -8.0
+volume_db = 2.0
+
+[node name="Coin" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_yttod")
+
+[node name="Coins" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("14_i6xgg")
 
 [node name="CardsDeal" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("10_vsaxh")
@@ -182,7 +401,44 @@ stream = ExtResource("13_tgsfq")
 volume_db = -8.0
 pitch_scale = 0.8
 
-[connection signal="pressed" from="GameOver/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
-[connection signal="pressed" from="GameOver/BtnExit" to="." method="_on_btn_exit_pressed"]
-[connection signal="pressed" from="LevelEndNewCard/Label/BtnContinue" to="." method="_on_btn_continue_pressed"]
-[connection signal="pressed" from="LevelEndNewCard/Label/BtnExit" to="." method="_on_btn_exit_pressed"]
+[node name="Combo" type="Node" parent="Sounds"]
+
+[node name="Combo01" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("19_uxvm2")
+
+[node name="Combo02" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("20_i6eei")
+
+[node name="Combo03" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("21_lwuc2")
+
+[node name="Combo04" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("22_mvwl5")
+
+[node name="Combo05" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("23_vtriv")
+
+[node name="Combo06" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("24_csaa2")
+
+[node name="Combo07" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("25_7a47i")
+
+[node name="Combo08" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("26_uqon1")
+
+[node name="Combo09" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("27_bvi1u")
+
+[node name="Combo10" type="AudioStreamPlayer" parent="Sounds/Combo"]
+stream = ExtResource("28_m326u")
+
+[connection signal="pressed" from="Interface/GameOver/HiScores/BtnPlayAgain" to="." method="_on_btn_play_again_pressed"]
+[connection signal="pressed" from="Interface/GameOver/HiScores/BtnExit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="Interface/GameOver/EnterName/BtnSubmitName" to="Interface/GameOver" method="_on_btn_submit_name_pressed"]
+[connection signal="pressed" from="Interface/LevelEndNewCard/Label/BtnContinue" to="." method="_on_btn_continue_pressed"]
+[connection signal="pressed" from="Interface/LevelEndNewCard/Label/BtnSaveAndExit" to="." method="_on_btn_save_and_exit_pressed"]
+[connection signal="pressed" from="Interface/StartRunScreen/Label/BtnStart" to="." method="_on_btn_start_pressed"]
+[connection signal="input_event" from="Interface/StartRunScreen/Card1" to="Interface/StartRunScreen" method="_on_card_1_input_event"]
+[connection signal="input_event" from="Interface/StartRunScreen/Card2" to="Interface/StartRunScreen" method="_on_card_2_input_event"]
+[connection signal="input_event" from="Interface/StartRunScreen/Card3" to="Interface/StartRunScreen" method="_on_card_3_input_event"]

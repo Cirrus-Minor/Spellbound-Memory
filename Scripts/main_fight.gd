@@ -1,6 +1,7 @@
 extends Node2D
 
 enum Game_state {
+	Starting,
 	DealCards,
 	WaitForCard1,
 	WaitForCard2,
@@ -14,6 +15,7 @@ const monster_pos_2 = 1050
 const monster_pos_3 = 900
 
 signal level_success
+signal restart_game
 signal game_over
 
 @onready var combo_text = $CardStack/ComboText
@@ -22,13 +24,25 @@ signal game_over
 @onready var player_ui = $UnitUI
 @onready var level_text = $HUD/Level
 @onready var money_text = $HUD/Money
-@onready var game_over_ui = $GameOver
-@onready var next_level_new_card_ui = $LevelEndNewCard
-@onready var sound_combo = $Sounds/Combo
+@onready var game_over_ui = $Interface/GameOver
+@onready var next_level_new_card_ui = $Interface/LevelEndNewCard
+@onready var start_run_ui = $Interface/StartRunScreen
 @onready var sound_combo_end = $Sounds/ComboEnd
+@onready var sound_combo_01 = $Sounds/Combo/Combo01
+@onready var sound_combo_02 = $Sounds/Combo/Combo02
+@onready var sound_combo_03 = $Sounds/Combo/Combo03
+@onready var sound_combo_04 = $Sounds/Combo/Combo04
+@onready var sound_combo_05 = $Sounds/Combo/Combo05
+@onready var sound_combo_06 = $Sounds/Combo/Combo06
+@onready var sound_combo_07 = $Sounds/Combo/Combo07
+@onready var sound_combo_08 = $Sounds/Combo/Combo08
+@onready var sound_combo_09 = $Sounds/Combo/Combo09
+@onready var sound_combo_10 = $Sounds/Combo/Combo10
 @onready var sound_cards_deal = $Sounds/CardsDeal
 @onready var sound_card_turn = $Sounds/CardTurn
 @onready var sound_revive = $Sounds/Revive
+@onready var sound_coin = $Sounds/Coin
+@onready var sound_coins = $Sounds/Coins
 
 @export var can_select_card = true
 
@@ -36,6 +50,8 @@ var card_class = preload("res://Scenes/memory_card.tscn")
 var monster_01 = preload("res://Scenes/monster_01.tscn")
 var monster_02 = preload("res://Scenes/monster_02.tscn")
 var monster_03 = preload("res://Scenes/monster_03.tscn")
+var monster_04 = preload("res://Scenes/monster_04.tscn")
+var monster_05 = preload("res://Scenes/monster_05.tscn")
 
 var full_deck = []
 var rest_deck = []
@@ -61,6 +77,24 @@ var player_shields_max = 3
 
 var monsters = []
 
+func start_level():
+	generate_monsters()
+	update_combo(0)
+	state = Game_state.WaitForCard1
+	full_deck = GameState.Deck.duplicate()
+	rest_deck = full_deck.duplicate()
+	for n in 20:
+		remaining_places.push_back(n)
+	process_cards(4)
+	
+func start_run():
+	if GameState.level == 1:
+		state = Game_state.Starting
+	
+func _on_btn_start_pressed():
+	start_run_ui.hide()
+	start_level()
+	
 func _ready():
 	player_health = GameState.player_health
 	player_health_max = GameState.player_health_max
@@ -68,20 +102,15 @@ func _ready():
 	player_shields_max = GameState.player_shields_max
 	update_player()
 	
-	level_text.text = "LVL: " + str(GameState.level)
+	level_text.text = "LVL " + str(GameState.level)
 	money_display = GameState.money
+	combo_text.text = ""
+	combo_effect_sprite.hide()
 	
-	generate_monsters()
-
-	update_combo(0)
-	state = Game_state.WaitForCard1
-	full_deck = GameState.Deck.duplicate()
-	rest_deck = full_deck.duplicate()
-	
-	for n in 20:
-		remaining_places.push_back(n)
-
-	process_cards(4)
+	if state == Game_state.Starting:
+		start_run_ui.show()
+	else:
+		start_level()
 	
 func _process(delta):
 	if money_display < GameState.money: money_display += 1
@@ -89,7 +118,7 @@ func _process(delta):
 	money_text.text = "$ " + str(money_display)
 	
 func _physics_process(delta):
-	combo_effect_sprite.modulate.a = 0.75 + 0.25 * sin(Time.get_ticks_msec() / 200 )
+	combo_effect_sprite.rotation_degrees += delta * 30
 		
 func process_cards(cards_to_reveal):
 	# clear cards to display
@@ -228,7 +257,7 @@ func reveal_cards(n):
 func update_combo(new_combo):
 	if combo > 0 && new_combo == 0:
 		sound_combo_end.play()
-		sound_combo.pitch_scale = 0.8
+
 	combo = new_combo
 	if (combo < 3):
 		combo_text.text = ""
@@ -237,14 +266,29 @@ func update_combo(new_combo):
 		combo_text.text = "Combo X" + str(combo)
 		combo_effect_sprite.show()
 		GameState.add_money(2)
+		sound_coin.play()
 		
 	if combo > 0:
-		sound_combo.play()
-		sound_combo.pitch_scale += 0.1
+		play_combo_sound(combo)
 
 func is_combo_power():
 	return combo > 3
 
+func play_combo_sound(combo):
+	match combo:
+		1: sound_combo_01.play()
+		2: sound_combo_02.play()
+		3: sound_combo_03.play()
+		4: sound_combo_04.play()
+		5: sound_combo_05.play()
+		6: sound_combo_06.play()
+		7: sound_combo_07.play()
+		8: sound_combo_08.play()
+		9: sound_combo_09.play()
+		_:
+			if combo % 2 == 0 : sound_combo_10.play()
+			else : sound_combo_09.play()
+			
 func _on_monster_attack(damages):
 	if player_health < 1:
 		return
@@ -287,6 +331,26 @@ func revive_monster(amount):
 		
 	check_victory()
 	
+func manipulate_cards(amount):
+	var complete_deck = []
+	for node in get_tree().get_nodes_in_group("cards"):
+			if (node.can_be_swapped()):
+				complete_deck.push_back(node.grid_index)
+
+	if (complete_deck.size() > 1):
+		complete_deck.shuffle()
+		get_tree().call_group("cards", "swap_cards", complete_deck.pop_back(), complete_deck.pop_back())
+	
+func ink_cards(amount, delay):
+	var complete_deck = []
+	for node in get_tree().get_nodes_in_group("cards"):
+			complete_deck.push_back(node)
+	complete_deck.shuffle()
+	if amount > complete_deck.size(): amount = complete_deck.size()
+	for i in amount:
+		var card = complete_deck.pop_front()
+		card.make_inked(delay)
+
 func check_victory():
 	if state == Game_state.GameOver: return
 	var is_victory = true
@@ -316,8 +380,6 @@ func victory():
 	next_level_new_card_ui.init_card(new_card)
 	next_level_new_card_ui.show()
 
-
-	
 func process_game_over():
 	player_health = 0
 	player.die()
@@ -326,12 +388,17 @@ func process_game_over():
 	get_tree().call_group("cards", "make_fall")
 	state = Game_state.GameOver
 	game_over_ui._show_with_score(GameState.money_total)
+	game_over.emit()
 	
 func _on_btn_play_again_pressed():
 	GameState.reset()
-	game_over.emit()
+	restart_game.emit()
 
 func _on_btn_exit_pressed():
+	get_tree().quit()
+	
+func _on_btn_save_and_exit_pressed():
+	GameState.save_game()
 	get_tree().quit()
 	
 func _on_btn_continue_pressed():
@@ -342,10 +409,7 @@ func _on_btn_continue_pressed():
 	GameState.level += 1
 	level_success.emit()
 	
-##############################
-##       LEVEL FACTORY      ##
-##############################
-	
+#region Level factory
 func generate_monsters():
 	monsters.clear()
 	
@@ -365,23 +429,47 @@ func generate_monsters():
 			add_monster(monster_01, monster_pos_1, 12)
 			add_monster(monster_01, monster_pos_2, 10)
 			add_monster(monster_01, monster_pos_3, 8)
-			
+
 		5:
-			add_monster(monster_03, monster_pos_1, 12)
+			add_monster(monster_05, monster_pos_1, 12)
 			add_monster(monster_01, monster_pos_2, 8)
 			
 		6:
+			add_monster(monster_04, monster_pos_1, 6)
+			add_monster(monster_01, monster_pos_2, 12)
+			add_monster(monster_01, monster_pos_3, 9)
+			
+		7:
+			add_monster(monster_04, monster_pos_1, 6)
+			add_monster(monster_02, monster_pos_2, 10)
+			
+		8:
+			add_monster(monster_04, monster_pos_1, 6)
+			add_monster(monster_05, monster_pos_2, 9)
+			add_monster(monster_01, monster_pos_3, 12)
+			
+		9:
+			add_monster(monster_03, monster_pos_1, 12)
+			add_monster(monster_01, monster_pos_2, 8)
+			
+		10:
 			add_monster(monster_03, monster_pos_1, 12)
 			add_monster(monster_02, monster_pos_2, 8)
 			
-		7:
+		11:
 			add_monster(monster_03, monster_pos_1, 12)
 			add_monster(monster_01, monster_pos_2, 10)
 			add_monster(monster_01, monster_pos_3, 8)
+			
+		12:
+			add_monster(monster_03, monster_pos_1, 12)
+			add_monster(monster_05, monster_pos_2, 10)
+			add_monster(monster_01, monster_pos_3, 8)
+			
 		_:
 			add_monster(monster_03, monster_pos_1, 12)
-			add_monster(monster_02, monster_pos_2, 10)
-			add_monster(monster_01, monster_pos_3, 8)
+			add_monster(monster_04, monster_pos_2, 10)
+			add_monster(monster_02, monster_pos_3, 8)
 	
 func add_monster(type, pos, delay):
 		var new_monster = type.instantiate()
@@ -389,28 +477,25 @@ func add_monster(type, pos, delay):
 		new_monster.timer_attack = delay
 		new_monster.on_monster_attack.connect(_on_monster_attack)
 		new_monster.on_revive_monster.connect(revive_monster)
+		new_monster.on_manipulate.connect(manipulate_cards)
+		new_monster.on_ink.connect(ink_cards)
 		monsters.push_front(new_monster)
 		add_child(new_monster)
-		
-##############################
-##       CARDS EFFECTS      ##
-##############################
+#endregion
 
-
+#region Card Effects
 func activate_card(card):
-	print(card)
-	
 	match card:
 		1: # Fireball
-			player.attack()
+			player.attack(2)
 			attack_monster(get_damages_fireball(), false)
 			
 		2: # Magic Missile
-			player.attack()
+			player.attack(1)
 			attack_monster(get_damages_missile(), false)
 			
 		3: # Lightning
-			player.attack()
+			player.attack(3)
 			attack_monster(get_damages_lightning(), true)
 			
 		4: # Hand
@@ -438,6 +523,7 @@ func activate_card(card):
 		8: # Coin +5
 			var gain = 5
 			if is_combo_power(): gain = gain * 2
+			sound_coins.play()
 			GameState.add_money(gain)
 		
 func get_damages_fireball():
@@ -463,3 +549,5 @@ func get_shields_gain():
 func get_reveal_number():
 	if is_combo_power() : return 6
 	else : return 4
+
+#endregion

@@ -8,6 +8,7 @@ extends Node2D
 @export var grid_index = 0 # 1 to 20
 
 @onready var sprite = $Sprite2D
+@onready var ink_sprite = $Sprite2D/Ink
 
 signal on_card_turned(id: int)
 signal on_cards_resumed()
@@ -20,6 +21,7 @@ var timer_turn = 0.0
 var timer_turn_animation = 0.0
 var timer_deal = 0.0
 var timer_fade = 0.0
+var timer_ink = 0.0
 var animation_step = 1
 
 var pos_origin
@@ -99,6 +101,13 @@ func _physics_process(delta):
 			position = pos_target
 			scale = Vector2(1, 1)
 			rotation_degrees = 0
+			
+	if (timer_ink > 0):
+		timer_ink -= delta
+		if (timer_ink <= 0):
+			ink_sprite.visible = false
+		elif timer_ink < 0.5:
+			ink_sprite.scale =Vector2(timer_ink * 0.27 * 2, timer_ink * 0.27 * 2)
 		
 	if (is_falling):
 		velocity.y += delta * 1000
@@ -146,6 +155,30 @@ func reveal_card(param_grid_index):
 		is_revealing = true
 		turn_card()
 
+func can_be_swapped():
+	return !is_turned && !is_revealing && !is_falling
+	
+func swap_cards(card1, card2):
+	if grid_index == card2:
+		card2 = card1
+		card1 = grid_index
+	
+	if grid_index != card1:
+		return
+
+	grid_index = card2
+	var x_array = grid_index % GameState.CARDS_PER_ROW
+	var y_array = grid_index / GameState.CARDS_PER_ROW
+	pos_target = Vector2(96 + (x_array) * 135, 92 + (y_array) * 133)
+	
+	var move_tween = get_tree().create_tween()
+	move_tween.tween_property(self, "position", pos_target, 0.4).set_trans(Tween.TRANS_CUBIC)
+	
+func make_inked(delay):
+	ink_sprite.scale = Vector2(0.27, 0.27)
+	ink_sprite.visible = true
+	timer_ink = delay
+	
 func make_fall():
 	timer_turn = 0.0
 	timer_turn_animation = 0.0
